@@ -1,4 +1,5 @@
 <template>
+    <!-- API通信中はローディング画面入れたい(コンポーネントで) -->
     <div>{{ words }}</div>
 </template>
 
@@ -8,7 +9,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            words: []
+            words: [],
         }
     },
     created() {
@@ -27,7 +28,7 @@ export default {
                 let j = Math.floor(Math.random() * (i + 1));
                 [arr[i],arr[j]] = [arr[j],arr[i]];
             }
-            return arr
+            return arr;
         },
     }
 }
