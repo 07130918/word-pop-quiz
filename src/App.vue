@@ -15,11 +15,20 @@ export default {
         axios.get()
         .then(response => {
             console.log(response);
-            this.words = response.data;
+            this.words = this.fisherYatesShuffle(response.data);
         })
         .catch(error => {
             console.log(error);
         })
+    },
+    methods: {
+        fisherYatesShuffle(arr) {
+            for(let i = arr.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i],arr[j]] = [arr[j],arr[i]];
+            }
+            return arr
+        },
     }
 }
 </script>
