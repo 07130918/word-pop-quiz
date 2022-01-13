@@ -5,11 +5,11 @@
 </template>
 
 <script>
-    export default {
-        methods: {
-            moveToQuiz() {
-                this.$router.push('quiz');
-            }
+export default {
+    methods: {
+        moveToQuiz() {
+            this.$router.push('quiz');
         }
     }
+}
 </script>
