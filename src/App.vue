@@ -1,9 +1,13 @@
 <template>
     <div>
-        <!-- API通信中はローディング画面入れたい(コンポーネントで) -->
-        <transition name="fade" mode="out-in">
-            <router-view :words="words"></router-view>
-        </transition>
+        <template v-if="loading">
+            <div class="loader">Now loading...</div>
+        </template>
+        <template v-else>
+            <transition name="fade" mode="out-in">
+                <router-view :words="words"></router-view>
+            </transition>
+        </template>
     </div>
 </template>
 
@@ -13,6 +17,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            loading: true,
             words: [],
         }
     },
@@ -21,6 +26,7 @@ export default {
         .then(response => {
             console.log(response);
             this.words = this.fisherYatesShuffle(response.data);
+            this.loading = false;
         })
         .catch(error => {
             console.log(error);
