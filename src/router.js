@@ -1,12 +1,16 @@
-import Vue from 'Vue'
+import Vue from 'vue'
 import Router from 'vue-router'
 
-const Index = () => import('.App.vue')
+const Quiz = () => import('./components/Quiz.vue')
+const Start = () => import('./components/Start.vue')
 
 Vue.use(Router)
 
-new Router({
+export default new Router({
+    mode: "history",
     routes: [
-        {path: '/', component: Index},
+        { path: '/', component: Start },
+        { path: '/quiz', component: Quiz },
+        { path: '*', redirect: '/' },
     ]
 })

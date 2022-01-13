@@ -1,6 +1,9 @@
 <template>
-    <!-- API通信中はローディング画面入れたい(コンポーネントで) -->
-    <div>{{ words }}</div>
+    <div>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -13,6 +16,7 @@ export default {
         }
     },
     created() {
+        console.log(this.$route);
         axios.get()
         .then(response => {
             console.log(response);
@@ -33,3 +37,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .3s;
+    }
+</style>
