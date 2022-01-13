@@ -11,5 +11,6 @@ export default new Router({
     routes: [
         { path: '/', component: Start },
         { path: '/quiz/:num', component: Quiz },
+        { path: '*', redirect: '/' },
     ]
 })
