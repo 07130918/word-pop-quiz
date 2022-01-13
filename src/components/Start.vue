@@ -33,7 +33,7 @@ export default {
             return arr;
         },
         moveToQuiz() {
-            this.$router.push('quiz');
+            this.$router.push('/quiz/1');
         },
     }
 }

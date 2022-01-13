@@ -10,7 +10,6 @@ export default new Router({
     mode: "history",
     routes: [
         { path: '/', component: Start },
-        { path: '/quiz', component: Quiz },
-        { path: '*', redirect: '/' },
+        { path: '/quiz/:num', component: Quiz },
     ]
 })
