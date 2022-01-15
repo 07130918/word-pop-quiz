@@ -3,11 +3,11 @@ import App from './App.vue'
 import axios from 'axios'
 import router from './router'
 
-import { API_URL } from './const'
+import Constants from './const'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = API_URL;
+axios.defaults.baseURL = Constants.API_URL;
 
 new Vue({
     router,
