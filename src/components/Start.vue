@@ -8,6 +8,7 @@
 export default {
     methods: {
         moveToQuiz() {
+            // :numが1になる
             this.$router.push('/quiz/1');
         },
     }
