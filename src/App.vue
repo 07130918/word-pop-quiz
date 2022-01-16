@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="loading">
-            <div class="loader">Now loading...</div>
+            <div class="loader"></div>
         </template>
         <template v-else>
             <transition name="fade" mode="out-in">
@@ -13,8 +13,10 @@
 
 <script>
 import axios from 'axios';
+import mixin from './mixin'
 
 export default {
+    mixins: [mixin],
     data() {
         return {
             loading: true,
@@ -32,15 +34,6 @@ export default {
             console.log(error);
         })
     },
-    methods: {
-        fisherYatesShuffle(arr) {
-            for(let i = arr.length - 1; i > 0; i--) {
-                let j = Math.floor(Math.random() * (i + 1));
-                [arr[i],arr[j]] = [arr[j],arr[i]];
-            }
-            return arr;
-        },
-    }
 }
 </script>
 
