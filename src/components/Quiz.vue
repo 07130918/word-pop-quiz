@@ -4,7 +4,7 @@
         <h2>{{ words[questionIndex].English }}</h2>
         <div>
             <div v-for="choice in choices" :key="choice.Japanese">
-                <button @click=judge(choice.Japanese) type="submit" :disabled="isAnswered">
+                <button @click=judge(choice) type="submit" :disabled="isAnswered">
                     {{ choice.Japanese }}
                 </button>
             </div>
@@ -43,6 +43,11 @@ export default {
             this.getChoices();
         }
     },
+    computed: {
+        trueAnswer() {
+            return this.words[this.questionIndex];
+        }
+    },
     methods: {
         getChoices() {
             if (this.choices.length) this.choices = [];
@@ -52,12 +57,22 @@ export default {
             });
         },
         makeShuffledChoices() {
+            let choices = this.makeChoices();
+            // 選択肢が重複しないようにする
+            let uniqueChoices = new Set(choices);
+            while (uniqueChoices.size != choices.length) {
+                choices = this.makeChoices();
+                this.makeChoices(choices);
+                uniqueChoices = new Set(choices);
+            }
+            return this.fisherYatesShuffle(choices);
+        },
+        makeChoices() {
             let choices = [];
             choices.push(this.getDummyAnswer());
             choices.push(this.getDummyAnswer());
-            choices.push(this.words[this.questionIndex]);
-            // この段階で配列の要素が被るとエラーになるのでそのケアが必須
-            return this.fisherYatesShuffle(choices);
+            choices.push(this.trueAnswer);
+            return choices;
         },
         getDummyAnswer() {
             return this.words[Math.floor(Math.random() * this.words.length)]
@@ -65,7 +80,7 @@ export default {
         judge(answer) {
             this.isAnswered = true;
 
-            if (answer === this.words[this.questionIndex].Japanese) {
+            if (answer.Japanese === this.trueAnswer.Japanese) {
                 console.log("collect");
             } else {
                 console.log("not collect");
