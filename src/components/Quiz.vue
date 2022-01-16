@@ -60,9 +60,8 @@ export default {
             let choices = this.makeChoices();
             // 選択肢が重複しないようにする
             let uniqueChoices = new Set(choices);
-            while (uniqueChoices.size != choices.length) {
+            while (choices.length != uniqueChoices.size) {
                 choices = this.makeChoices();
-                this.makeChoices(choices);
                 uniqueChoices = new Set(choices);
             }
             return this.fisherYatesShuffle(choices);
