@@ -3,17 +3,20 @@
         <h3>Question {{ $route.params.num }}</h3>
         <h2>{{ words[questionIndex].English }}</h2>
         <div>
-            <button @click=judge(choices[0].Japanese) type="submit">
-                {{ choices[0].Japanese }}
-            </button>
-            <button @click=judge(choices[1].Japanese) type="submit">
-                {{ choices[1].Japanese }}
-            </button>
-            <button @click=judge(choices[2].Japanese) type="submit">
-                {{ choices[2].Japanese }}
-            </button>
+            <div v-for="choice in choices" :key="choice.Japanese">
+                <button @click=judge(choice.Japanese) type="submit" :disabled="isAnswered">
+                    {{ choice.Japanese }}
+                </button>
+            </div>
         </div>
-        <button @click=moveToNextQuiz()>Next</button>
+        <div>
+            <a :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
+                詳しく見る
+            </a>
+        </div>
+        <div>
+            <button @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
+        </div>
     </div>
 </template>
 
@@ -25,8 +28,9 @@ export default {
     mixins: [mixin],
     data() {
         return {
-            questionIndex: this.$route.params.num - 1,
             choices: [],
+            isAnswered: false,
+            questionIndex: this.$route.params.num - 1,
         }
     },
     created() {
@@ -35,6 +39,7 @@ export default {
     watch: {
         // URL変更を監視(SPAはページ遷移している様に見せているだけ)
         $route() {
+            this.isAnswered = false;
             this.getChoices();
         }
     },
@@ -51,12 +56,15 @@ export default {
             choices.push(this.getDummyAnswer());
             choices.push(this.getDummyAnswer());
             choices.push(this.words[this.questionIndex]);
+            // この段階で配列の要素が被るとエラーになるのでそのケアが必須
             return this.fisherYatesShuffle(choices);
         },
         getDummyAnswer() {
             return this.words[Math.floor(Math.random() * this.words.length)]
         },
         judge(answer) {
+            this.isAnswered = true;
+
             if (answer === this.words[this.questionIndex].Japanese) {
                 console.log("collect");
             } else {
