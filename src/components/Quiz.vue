@@ -24,6 +24,15 @@
 import mixin from '../mixin'
 
 export default {
+    // router機能: quiz/以下に大きな数字が直接入力された場合Startへ返す
+    beforeRouteEnter(to, from, next) {
+        // vmは勝手に使える
+        next(vm => {
+            if (Number(to.params.num) > vm.words.length) {
+                next('/');
+            }
+        });
+    },
     props: ["words"],
     mixins: [mixin],
     data() {
