@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="loading">
-            <div class="loader"></div>
+            <div class="loader absolute inset-0 m-auto"></div>
         </template>
         <template v-else>
             <transition name="fade" mode="out-in">
