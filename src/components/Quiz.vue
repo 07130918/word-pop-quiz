@@ -9,7 +9,7 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div v-if="words[questionIndex].url && isAnswered">
             <a :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
                 詳しく見る
             </a>
@@ -79,6 +79,7 @@ export default {
         judge(answer) {
             this.isAnswered = true;
 
+            // 画面に表示させる必要あり
             if (answer.Japanese === this.trueAnswer.Japanese) {
                 console.log("collect");
             } else {
@@ -86,6 +87,7 @@ export default {
             }
         },
         moveToNextQuiz() {
+            // 最後まで行ったときの処理が必要
             this.$router.push(`/quiz/${Number(this.$route.params.num) + 1}`);
             this.questionIndex++;
         },
