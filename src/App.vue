@@ -38,6 +38,7 @@ export default {
 </script>
 
 <style scoped>
+    /* transitionタグname属性に対応する特別なclass */
     .fade-enter, .fade-leave-to {
         opacity: 0;
     }
