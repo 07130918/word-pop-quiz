@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Let's start the word pop quiz</h2>
         <button @click=moveToQuiz()>Start</button>
     </div>
 </template>

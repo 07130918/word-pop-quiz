@@ -11,7 +11,7 @@
         </div>
         <div v-if="words[questionIndex].url && isAnswered">
             <a :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
-                詳しく見る
+                See more
             </a>
         </div>
         <div>
@@ -87,7 +87,12 @@ export default {
             }
         },
         moveToNextQuiz() {
-            // 最後まで行ったときの処理が必要
+            // 最終問題回答後
+            if (this.$route.params.num == this.words.length) {
+                this.$router.push('/goal');
+                return;
+            }
+
             this.$router.push(`/quiz/${Number(this.$route.params.num) + 1}`);
             this.questionIndex++;
         },
