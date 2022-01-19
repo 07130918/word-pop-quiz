@@ -9,6 +9,8 @@ import 'normalize.css'
 
 import Constants from './const'
 
+require('./assets/scss/style.scss')
+
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = Constants.API_URL;
