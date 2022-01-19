@@ -11,8 +11,8 @@
                 <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
             </div>
             <div class="quiz__content">
-                <div class="choice-wrapper" v-for="choice in choices" :key="choice.Japanese">
-                    <button class="btn btn-success btn-lg" @click=judge(choice) type="submit" :disabled="isAnswered">
+                <div class="choice__wrapper" v-for="choice in choices" :key="choice.English">
+                    <button class="choice__btn btn btn-success btn-lg" @click=judge(choice) type="submit" :disabled="isAnswered">
                         {{ choice.Japanese }}
                     </button>
                 </div>

@@ -63,11 +63,18 @@ body {
     }
     &__content {
         padding-top: 2vh;
+        padding-right: 15vw;
         @include quiz-pl;
     }
 }
 
-.choice-wrapper {
-    padding-bottom: 2vh;
+.choice {
+    &__wrapper {
+        padding-bottom: 2vh;
+    }
+    &__btn {
+        white-space: pre-line;
+        word-break: break-all;
+    }
 }
 // Quiz.vueここまで
