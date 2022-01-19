@@ -1,5 +1,8 @@
 <template>
     <div>
+        <header>
+              <button class="btn btn-danger btn-lg" @click=moveToGoal()>Quit</button>
+        </header>
         <div class="quiz__header">
             <h4>Question {{ $route.params.num }}</h4>
             <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
@@ -87,7 +90,7 @@ export default {
             return choices;
         },
         getDummyAnswer() {
-            return this.words[Math.floor(Math.random() * this.words.length)]
+            return this.words[Math.floor(Math.random() * this.words.length)];
         },
         judge(answer) {
             this.isAnswered = true;
@@ -99,10 +102,13 @@ export default {
                 console.log("not collect");
             }
         },
+        moveToGoal() {
+            this.$router.push('/goal');
+        },
         moveToNextQuiz() {
             // 最終問題回答後
             if (this.$route.params.num == this.words.length) {
-                this.$router.push('/goal');
+                this.moveToGoal();
                 return;
             }
 
