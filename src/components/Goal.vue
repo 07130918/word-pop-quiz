@@ -1,14 +1,29 @@
 <template>
     <div class="content">
-        <h2 class="description">You've answered all questions</h2>
-        <button class="btn btn-primary btn-lg" @click=moveToStart()>Retry</button>
+        <h2 class="description">{{ message }}</h2>
+        <button class="btn btn-primary btn-lg" @click=moveToRoot()>Retry</button>
     </div>
 </template>
 
 <script>
 export default {
+    props: ["words"],
+    data() {
+        return {
+            message: '',
+        }
+    },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            if (Number(from.params.num) === vm.words.length) {
+                vm.message = "You've answered all questions";
+            } else {
+                vm.message = "See ya !";
+            }
+        });
+    },
     methods: {
-        moveToStart() {
+        moveToRoot() {
             this.$router.push('/');
         },
     }

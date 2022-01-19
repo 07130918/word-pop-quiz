@@ -26,13 +26,15 @@ export default {
     created() {
         axios.get()
         .then(response => {
-            console.log(response);
+            console.log(`We got ${response.data.length} words.`);
             this.words = this.fisherYatesShuffle(response.data);
-            this.loading = false;
         })
         .catch(error => {
             console.log(error);
         })
+        .finally(() => {
+            this.loading = false;
+        });
     },
 }
 </script>

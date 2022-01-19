@@ -49,6 +49,7 @@ export default {
         // vmは勝手に使える
         next(vm => {
             if (Number(to.params.num) > vm.words.length) {
+                console.log('Invaild URL');
                 next('/');
             }
         });
@@ -111,7 +112,7 @@ export default {
         },
         moveToNextQuiz() {
             // 最終問題回答後
-            if (this.$route.params.num == this.words.length) {
+            if (Number(this.$route.params.num) === this.words.length) {
                 this.moveToGoal();
                 return;
             }
