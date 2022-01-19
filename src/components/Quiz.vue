@@ -1,21 +1,25 @@
 <template>
     <div>
-        <h3>Question {{ $route.params.num }}</h3>
-        <h2>{{ words[questionIndex].English }}</h2>
-        <div>
+        <div class="quiz__header">
+            <h4>Question {{ $route.params.num }}</h4>
+            <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
+        </div>
+        <div class="quiz__content">
             <div v-for="choice in choices" :key="choice.Japanese">
-                <button @click=judge(choice) type="submit" :disabled="isAnswered">
+                <button class="choice btn btn-success btn-lg" @click=judge(choice) type="submit" :disabled="isAnswered">
                     {{ choice.Japanese }}
                 </button>
             </div>
-        </div>
-        <div v-if="words[questionIndex].url && isAnswered">
-            <a :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
-                See more
-            </a>
-        </div>
-        <div>
-            <button @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
+            <div class="mt-4">
+                <div class="d-inline">
+                    <button class="btn btn-primary btn-lg mr-4" @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
+                </div>
+                <div class="d-inline" v-if="words[questionIndex].url && isAnswered">
+                    <a class="btn btn-outline-info btn-lg" role="button" :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
+                        See more
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </template>

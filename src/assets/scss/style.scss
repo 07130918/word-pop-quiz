@@ -1,3 +1,13 @@
+// scss内での呼び出し専用
+@mixin position-center50 {
+    position: absolute;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+// scss内での呼び出し専用ここまで
+
 body {
     height: 100vh;
     width: 100vw;
@@ -13,15 +23,25 @@ body {
 }
 
 .content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: 20em;
+    @include position-center50;
+    height: 10em;
     text-align: center;
     .description {
         margin-bottom: 5vh;
     }
+}
+
+.quiz {
+    &__header {
+        margin-top: 15vh;
+        margin-left: 10vw;
+    }
+    &__content {
+        @include position-center50;
+        margin-left: 10vw;
+    }
+}
+
+.choice {
+    margin-bottom: 2vh;
 }

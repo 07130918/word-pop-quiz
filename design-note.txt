@@ -1,0 +1,2 @@
+background-image探す
+マルバツを表示
