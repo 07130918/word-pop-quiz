@@ -7,7 +7,7 @@
                 </div>
             </header>
             <div class="quiz__header">
-                <h4>Question {{ $route.params.num }}</h4>
+                <h3>Question {{ $route.params.num }}</h3>
                 <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
             </div>
             <div class="quiz__content">
