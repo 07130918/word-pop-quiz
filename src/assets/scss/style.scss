@@ -6,14 +6,11 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
 }
-// scss内での呼び出し専用ここまで
 
-body {
-    height: 100vh;
-    width: 100vw;
-    background-image: url("../iPhone-wallpapers-mountains-blue.png");
-    background-size: cover;
+@mixin quiz-pl {
+    padding-left: 15vw;
 }
+// scss内での呼び出し専用ここまで
 
 .loader {
     position: absolute;
@@ -24,26 +21,53 @@ body {
     margin: auto;
 }
 
+body {
+    background-image: url("../iPhone-wallpapers-mountains-blue.png");
+    background-size: cover;
+}
+
+// Start.vue Goal.vue
 .content {
     @include position-center50;
     height: 10em;
     text-align: center;
+
     .description {
         margin-bottom: 5vh;
     }
+}
+// Start.vue Goal.vueここまで
+
+// Quiz.vue
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.header-quit {
+    text-align: right;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.quit-btn {
+    margin-right: 4vw;
 }
 
 .quiz {
     &__header {
         margin-top: 15vh;
-        margin-left: 10vw;
+        @include quiz-pl;
     }
     &__content {
-        @include position-center50;
-        margin-left: 10vw;
+        padding-top: 2vh;
+        @include quiz-pl;
     }
 }
 
-.choice {
-    margin-bottom: 2vh;
+.choice-wrapper {
+    padding-bottom: 2vh;
 }
+// Quiz.vueここまで
