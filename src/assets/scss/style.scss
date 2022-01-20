@@ -22,7 +22,7 @@
 }
 
 body {
-    background-image: url("../iPhone-wallpapers-mountains-blue.png");
+    background-image: url("../iPhone-wallpaper.png");
     background-size: cover;
 }
 
@@ -45,29 +45,28 @@ body {
     overflow: hidden;
 }
 
-.header-quit {
+header {
     text-align: right;
     padding-top: 2vh;
     padding-bottom: 2vh;
     border-bottom: 2px solid #FFFFFF;
-}
-
-.quit-btn {
-    margin-right: 4vw;
+    button {
+        margin-right: 4vw;
+    }
 }
 
 .quiz {
+    &__wrapper {
+        margin: 8vh 10vw;
+        padding: 2vh 5vw;
+    }
     &__header {
-        margin-top: 10vh;
-        @include quiz-pl;
         h1 {
             margin-top: 5vh;
         }
     }
     &__content {
         padding-top: 2vh;
-        padding-right: 15vw;
-        @include quiz-pl;
     }
 }
 
@@ -81,3 +80,10 @@ body {
     }
 }
 // Quiz.vueここまで
+
+// PC用
+@media screen and (min-width: 960px) {
+    body {
+        background-image: url("../PC-wallparer.png");
+    }
+}
