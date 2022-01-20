@@ -4,6 +4,10 @@
     width: 100vw;
     overflow: hidden;
 }
+
+@mixin pc-bg-o {
+    background-color: rgba($color: #FFF, $alpha: .4);
+}
 // scss内での呼び出し専用ここまで
 
 .loader {
@@ -32,7 +36,6 @@ body {
     }
 }
 // Start.vue Goal.vueここまで
-
 // Quiz.vue
 .wrapper {
     @include wrap;
@@ -74,16 +77,22 @@ header {
     }
 }
 // Quiz.vueここまで
-
 // PC用
 @media screen and (min-width: 960px) {
     body {
         background-image: url("../PC-wallparer.png");
     }
+    .content__wrapper {
+        .description {
+            @include pc-bg-o;
+            margin-right: 35vh;
+            margin-left: 35vh;
+        }
+    }
 
     .quiz {
         &__wrapper {
-            background-color: rgba($color: #FFF, $alpha: .4);
+            @include pc-bg-o;
         }
     }
 }
