@@ -43,12 +43,13 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    // 背景写真の透過度を調整
+    background-color: rgba(255, 255, 255, .1);
 }
 
 header {
     text-align: right;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
+    padding: 2vh 0vw;
     border-bottom: 2px solid #FFFFFF;
     button {
         margin-right: 4vw;
@@ -85,5 +86,11 @@ header {
 @media screen and (min-width: 960px) {
     body {
         background-image: url("../PC-wallparer.png");
+    }
+
+    .quiz {
+        &__wrapper {
+            background-color: rgba($color: #FFF, $alpha: .4);
+        }
     }
 }
