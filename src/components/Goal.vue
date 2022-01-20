@@ -1,7 +1,9 @@
 <template>
-    <div class="content">
-        <h2 class="description">{{ message }}</h2>
-        <button class="btn btn-primary btn-lg" @click=moveToRoot()>Retry</button>
+    <div class="content__wrapper">
+        <div>
+            <h2 class="description">{{ message }}</h2>
+            <button class="btn btn-primary btn-lg" @click=moveToRoot()>Retry</button>
+        </div>
     </div>
 </template>
 

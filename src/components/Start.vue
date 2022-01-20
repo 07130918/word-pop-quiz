@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div class="content">
-            <h2 class="description">Let's start<br/>the word pop quiz</h2>
-            <button class="btn btn-primary btn-lg" @click=moveToQuiz()>Start</button>
+        <div class="content__wrapper">
+            <div>
+                <h2 class="description">Let's start<br/>the word pop quiz</h2>
+                <button class="btn btn-primary btn-lg" @click=moveToQuiz()>Start</button>
+            </div>
         </div>
     </div>
 </template>
