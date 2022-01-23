@@ -20,9 +20,9 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             if (Number(from.params.num) === vm.words.length) {
-                vm.message = "You've answered all questions!";
+                vm.message = "You've answered all of questions!";
             } else {
-                vm.message = "See ya !";
+                vm.message = "See ya!";
             }
         });
     },
