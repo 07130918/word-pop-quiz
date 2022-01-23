@@ -114,9 +114,9 @@ export default {
                 }, 1000)
             } else {
                 this.isIncorrectAnswer = true;
-                // setTimeout(() => {
-                //     this.isIncorrectAnswer = false;
-                // }, 3000)
+                setTimeout(() => {
+                    this.isIncorrectAnswer = false;
+                }, 1000)
             }
         },
         moveToGoal() {
