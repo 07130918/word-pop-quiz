@@ -5,6 +5,10 @@
                 <button class="btn btn-danger btn-lg" @click=moveToGoal()>Quit</button>
             </header>
             <div class="quiz__wrapper">
+                <div :class="{ 'correct-icon': isCorrectAnswer }">
+                    <span></span>
+                </div>
+                <div :class="{ 'incorrect-icon': isIncorrectAnswer }"></div>
                 <div class="quiz__header">
                     <h3>Question {{ $route.params.num }}</h3>
                     <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
@@ -41,6 +45,8 @@ export default {
         return {
             choices: [],
             isAnswered: false,
+            isCorrectAnswer: false,
+            isIncorrectAnswer: false,
             questionIndex: this.$route.params.num - 1,
         }
     },
@@ -61,6 +67,8 @@ export default {
         // URL変更を監視(SPAはページ遷移している様に見せているだけ)
         $route() {
             this.isAnswered = false;
+            this.isCorrectAnswer = false;
+            this.isIncorrectAnswer = false;
             this.getChoices();
         }
     },
@@ -99,12 +107,16 @@ export default {
         },
         judge(answer) {
             this.isAnswered = true;
-
-            // 画面に表示させる必要あり
             if (answer.Japanese === this.trueAnswer.Japanese) {
-                console.log("collect");
+                this.isCorrectAnswer = true;
+                setTimeout(() => {
+                    this.isCorrectAnswer = false;
+                }, 1000)
             } else {
-                console.log("not collect");
+                this.isIncorrectAnswer = true;
+                // setTimeout(() => {
+                //     this.isIncorrectAnswer = false;
+                // }, 3000)
             }
         },
         moveToGoal() {
