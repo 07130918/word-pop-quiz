@@ -97,8 +97,9 @@ export default {
         },
         makeChoices() {
             let choices = [];
-            choices.push(this.getDummyAnswer());
-            choices.push(this.getDummyAnswer());
+            for (let i = 0; i < 3; i++) {
+                choices.push(this.getDummyAnswer());
+            }
             choices.push(this.trueAnswer);
             return choices;
         },
