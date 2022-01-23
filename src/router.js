@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Quiz = () => import('./components/Quiz.vue')
-const Start = () => import('./components/Start.vue')
-const Goal = () => import('./components/Goal.vue')
+const Quiz = () => import(/* webpackChunkName: "Quiz" */ './components/Quiz.vue')
+const Start = () => import(/* webpackChunkName: "Start" */ './components/Start.vue')
+const Goal = () => import(/* webpackChunkName: "End" */ './components/Goal.vue')
 
 Vue.use(Router)
 
