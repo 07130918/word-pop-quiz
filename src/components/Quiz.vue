@@ -18,7 +18,7 @@
                         {{ choice.Japanese }}
                     </button>
                 </div>
-                <div class="mt-5">
+                <div class="quiz__next">
                     <div class="d-inline">
                         <button class="btn btn-primary btn-lg mr-4" @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
                     </div>

@@ -106,6 +106,9 @@ header {
     &__content {
         padding-top: 2vh;
     }
+    &__next {
+        margin-top: 2vh;
+    }
 }
 
 .choice {
@@ -155,6 +158,9 @@ header {
                 left: 0;
                 width: 450px;
             }
+        }
+        &__next {
+            margin-top: 5vh;
         }
     }
 }
