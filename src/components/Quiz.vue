@@ -1,33 +1,31 @@
 <template>
     <div>
-        <div class="wrapper">
-            <header>
-                <button class="btn btn-danger btn-lg" @click=moveToGoal()>Quit</button>
-            </header>
-            <div class="quiz__wrapper">
-                <div :class="{ 'correct-icon': isCorrectAnswer }">
-                    <span></span>
+        <header>
+            <button class="btn btn-danger btn-lg" @click=moveToGoal()>Quit</button>
+        </header>
+        <div class="quiz__wrapper">
+            <div :class="{ 'correct-icon': isCorrectAnswer }">
+                <span></span>
+            </div>
+            <div :class="{ 'incorrect-icon': isIncorrectAnswer }"></div>
+            <div class="quiz__header">
+                <h3>Question {{ $route.params.num }}</h3>
+                <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
+            </div>
+            <div class="quiz__content">
+                <div class="choice__wrapper" v-for="choice in choices" :key="choice.English">
+                    <button class="choice__btn btn btn-success btn-lg" @click=judge(choice) type="submit" :disabled="isAnswered">
+                        {{ choice.Japanese }}
+                    </button>
                 </div>
-                <div :class="{ 'incorrect-icon': isIncorrectAnswer }"></div>
-                <div class="quiz__header">
-                    <h3>Question {{ $route.params.num }}</h3>
-                    <h1 class="font-weight-bold">{{ words[questionIndex].English }}</h1>
-                </div>
-                <div class="quiz__content">
-                    <div class="choice__wrapper" v-for="choice in choices" :key="choice.English">
-                        <button class="choice__btn btn btn-success btn-lg" @click=judge(choice) type="submit" :disabled="isAnswered">
-                            {{ choice.Japanese }}
-                        </button>
+                <div class="mt-5">
+                    <div class="d-inline">
+                        <button class="btn btn-primary btn-lg mr-4" @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
                     </div>
-                    <div class="mt-5">
-                        <div class="d-inline">
-                            <button class="btn btn-primary btn-lg mr-4" @click=moveToNextQuiz() :disabled="!isAnswered">Next</button>
-                        </div>
-                        <div class="d-inline" v-if="words[questionIndex].url && isAnswered">
-                            <a class="btn btn-info btn-lg" role="button" :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
-                                See more
-                            </a>
-                        </div>
+                    <div class="d-inline" v-if="words[questionIndex].url && isAnswered">
+                        <a class="btn btn-info btn-lg" role="button" :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
+                            See more
+                        </a>
                     </div>
                 </div>
             </div>

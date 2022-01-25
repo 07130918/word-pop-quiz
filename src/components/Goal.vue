@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="content__wrapper">
+        <div class="start-goal__wrapper">
             <div>
                 <h2 class="description">{{ message }}</h2>
                 <button class="btn btn-primary btn-lg" @click=moveToRoot()>Retry</button>
