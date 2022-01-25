@@ -106,6 +106,7 @@ export default {
         },
         judge(answer) {
             this.isAnswered = true;
+            this.showResultsWithBtnStyle();
             if (answer.Japanese === this.trueAnswer.Japanese) {
                 this.isCorrectAnswer = true;
                 setTimeout(() => {
@@ -116,6 +117,17 @@ export default {
                 setTimeout(() => {
                     this.isIncorrectAnswer = false;
                 }, 1000)
+            }
+        },
+        showResultsWithBtnStyle() {
+            for (let i = 0; i < this.choices.length; i++) {
+                let answeredBtnDOM = document.querySelectorAll(".choice__btn")[i];
+                answeredBtnDOM.classList.remove('btn-success');
+                if (this.choices[i].Japanese === this.trueAnswer.Japanese) {
+                    answeredBtnDOM.classList.add('btn-danger');
+                } else {
+                    answeredBtnDOM.classList.add('btn-outline-secondary');
+                }
             }
         },
         moveToGoal() {
