@@ -27,7 +27,7 @@
 body {
     font-family: 'Lora', serif;
     background-image: url("../iPhone-wallpaper.png");
-    background-size: cover;
+    background-size: 100% auto;
 }
 
 // Start.vue Goal.vue
@@ -130,6 +130,7 @@ header {
 @media screen and (min-width: 960px) {
     body {
         background-image: url("../PC-wallparer.png");
+        background-size: cover;
     }
     .content__wrapper {
         .description {
