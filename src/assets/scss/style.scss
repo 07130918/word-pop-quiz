@@ -51,7 +51,7 @@ body {
 
 header {
     text-align: right;
-    padding: 2vh 0vw;
+    padding: 1vh 0;
     border-bottom: 2px solid #FFFFFF;
     button {
         margin-right: 4vw;
@@ -61,7 +61,7 @@ header {
 .quiz {
     &__wrapper {
         position: relative;
-        margin: 8vh 10vw;
+        margin: 0 10vw;
         padding: 2vh 5vw;
         .correct-icon {
             @include z-index-first;
@@ -139,9 +139,14 @@ header {
         }
     }
 
+    header {
+        padding: 2vh 0;
+    }
+
     .quiz {
         &__wrapper {
             @include pc-bg-o;
+            margin: 8vh 10vw;
             .correct-icon {
                 height: 350px;
                 width: 350px;
