@@ -62,18 +62,19 @@ export default {
         this.getChoices();
     },
     watch: {
-        // URL変更を監視(SPAはページ遷移している様に見せているだけ)
+        // quiz/以下のURL変更を監視(SPAはページ遷移している様に見せているだけ)
         $route() {
             this.isAnswered = false;
             this.isCorrectAnswer = false;
             this.isIncorrectAnswer = false;
             this.getChoices();
+            this.btnsStyleChangeTo('init');
         }
     },
     computed: {
         trueAnswer() {
             return this.words[this.questionIndex];
-        }
+        },
     },
     methods: {
         getChoices() {
@@ -106,7 +107,7 @@ export default {
         },
         judge(answer) {
             this.isAnswered = true;
-            this.showResultsWithBtnStyle();
+            this.btnsStyleChangeTo('result');
             if (answer.Japanese === this.trueAnswer.Japanese) {
                 this.isCorrectAnswer = true;
                 setTimeout(() => {
@@ -119,17 +120,27 @@ export default {
                 }, 1000)
             }
         },
-        showResultsWithBtnStyle() {
-            for (let i = 0; i < this.choices.length; i++) {
-                let answeredBtnDOM = document.querySelectorAll(".choice__btn")[i];
-                answeredBtnDOM.classList.remove('btn-success');
-                if (this.choices[i].Japanese === this.trueAnswer.Japanese) {
-                    answeredBtnDOM.classList.add('btn-danger');
-                } else {
-                    answeredBtnDOM.classList.add('btn-outline-secondary');
-                }
+        // ボタンの見た目変更に関わる関数群
+        btnsStyleChangeTo(flg) {
+            document.querySelectorAll(".choice__btn").forEach(btn => {
+                flg === 'init' ? this.toInitStyle(btn) : this.toResultStyle(btn);
+            });
+        },
+        toInitStyle(btn) {
+            if(btn.className.split(' ').includes('btn-danger')) {
+                btn.classList.replace('btn-danger', 'btn-success');
+            } else {
+                btn.classList.replace('btn-outline-secondary', 'btn-success');
             }
         },
+        toResultStyle(btn) {
+            if (btn.innerText === this.trueAnswer.Japanese) {
+                btn.classList.replace('btn-success','btn-danger');
+            } else {
+                btn.classList.replace('btn-success','btn-outline-secondary');
+            }
+        },
+        // ページ遷移関数群
         moveToGoal() {
             this.$router.push('/goal');
         },
