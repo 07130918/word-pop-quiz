@@ -24,7 +24,7 @@
                     </div>
                     <div class="d-inline" v-if="words[questionIndex].url && isAnswered">
                         <a class="btn btn-info btn-lg" role="button" :href="words[questionIndex].url" target="_blank" rel="noopener noreferrer">
-                            See more
+                            View details
                         </a>
                     </div>
                 </div>
