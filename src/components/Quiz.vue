@@ -53,7 +53,7 @@ export default {
         // vmは勝手に使える
         next(vm => {
             if (Number(to.params.num) > vm.words.length) {
-                console.log('Invaild URL');
+                console.log('Invalid URL');
                 next('/');
             }
         });

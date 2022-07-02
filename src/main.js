@@ -7,13 +7,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'normalize.css'
 
-import preferences from './secret'
+import config from './config'
 
 require('./assets/scss/style.scss')
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = preferences.API_URL;
+axios.defaults.baseURL = config.API_URL;
 
 new Vue({
     router,

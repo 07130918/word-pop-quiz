@@ -26,7 +26,6 @@ export default {
     created() {
         axios.get()
         .then(response => {
-            console.log(`We've got ${response.data.length} words.`);
             this.words = this.fisherYatesShuffle(response.data);
         })
         .catch(error => {
