@@ -1,6 +1,4 @@
-import { WordObjects } from "../types/wordObject";
-
-const fisherYatesShuffle = <T>(arr: T[]) => {
+const fisherYatesShuffle = <T>(arr: T[]): T[] => {
     const newArr = [...arr];
     for (let i = newArr.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
