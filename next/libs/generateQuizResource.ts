@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import type { WordObject, WordObjects, WordQuizObject } from "../types/wordObject";
+import type { WordObject, WordObjects, WordQuizObject, WordQuizObjects } from "../types/wordObject";
 import fisherYatesShuffle from './shuffle';
 
 const configureChoices = (choices: string[]): string[] => {
@@ -23,7 +23,7 @@ const configureUniqueChoices = (choices: string[]): string[] => {
     };
 }
 
-const generateQuizResource = (orderlyWordObjects: WordObjects): WordObjects => {
+const generateQuizResource = (orderlyWordObjects: WordObjects): WordQuizObjects => {
     const allChoices = orderlyWordObjects.map(
         (wordObject: WordObject) => wordObject.Japanese);
 
