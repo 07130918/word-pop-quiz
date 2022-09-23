@@ -1,18 +1,21 @@
 import {
     Alert,
     AlertIcon,
-    AlertTitle, Flex, Button, Link as ChakraLink
+    AlertTitle, Button, Flex, Link as ChakraLink
 } from '@chakra-ui/react';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import NextLink from "next/link";
 import { useEffect, useState } from 'react';
+import type { WordQuizObjects } from '../types/wordObject';
 
 const Home: NextPage = () => {
     useEffect(() => {
         (async () => {
             try {
-                await axios.get('/api/words');
+                const res = await axios.get('/api/quizzes');
+                setQuizzes(res.data);
+                console.log('done!!!');
             } catch (error) {
                 console.error(error);
                 setError(true);
@@ -20,6 +23,7 @@ const Home: NextPage = () => {
         })();
     }, []);
 
+    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
     const [errorState, setError] = useState<boolean>(false);
 
     return (
@@ -36,7 +40,12 @@ const Home: NextPage = () => {
                     color='#FE53BB'
                     isDisabled={errorState}
                 >
-                    <NextLink href='/quiz/1'>
+                    <NextLink href={{
+                        pathname: '/quiz/1',
+                        query: { quizzes: JSON.stringify(quizzes) }
+                    }}
+                        as='/quiz/1'
+                    >
                         <ChakraLink
                             fontWeight='bold'
                             _hover={{ textDecoration: 'none' }}

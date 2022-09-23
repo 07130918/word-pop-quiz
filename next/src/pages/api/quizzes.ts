@@ -6,7 +6,7 @@ import fisherYatesShuffle from '../../libs/shuffle';
 
 const API_URL = process.env.API_URL!;
 
-const getWords = async (req: NextApiRequest, res: NextApiResponse) => {
+const quizzes = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const _res = await axios.get(API_URL);
         const orderlyWordObjects: WordObjects = _res.data;
@@ -18,4 +18,4 @@ const getWords = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export default getWords;
+export default quizzes;

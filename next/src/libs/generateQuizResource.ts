@@ -39,7 +39,6 @@ const generateQuizResource = (orderlyWordObjects: WordObjects): WordQuizObjects 
         );
 
         const quizResource: WordQuizObject = {
-            id: uuidv4(),
             English: wordObject.English,
             Japanese: wordObject.Japanese,
             url: wordObject.url,

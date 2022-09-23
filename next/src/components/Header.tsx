@@ -1,4 +1,5 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Link as ChakraLink } from '@chakra-ui/react';
+import NextLink from "next/link";
 
 const Header = () => {
     return (
@@ -13,7 +14,15 @@ const Header = () => {
                 <Button
                     marginRight={10}
                     colorScheme='teal'
-                >Quit</Button>
+                >
+                    <NextLink href='/'>
+                        <ChakraLink
+                            fontWeight='bold'
+                            _hover={{ textDecoration: 'none' }}
+                        >Quit
+                        </ChakraLink>
+                    </NextLink>
+                </Button>
             </Box>
         </>
     );

@@ -5,7 +5,6 @@ interface WordObject {
 }
 
 interface WordQuizObject {
-    id: string;
     English: string;
     Japanese: string;
     url: string;
