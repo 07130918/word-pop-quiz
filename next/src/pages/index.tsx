@@ -1,32 +1,51 @@
-import { Box, Button } from '@chakra-ui/react';
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle, Flex, Button, Link as ChakraLink
+} from '@chakra-ui/react';
 import axios from 'axios';
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import NextLink from "next/link";
+import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
-    const getWords = async () => {
-        const res = await axios.get('/api/words');
-        console.log(res.data);
-        setWords(res.data);
-    }
-    const [words, setWords] = useState([]);
+    useEffect(() => {
+        (async () => {
+            try {
+                await axios.get('/api/words');
+            } catch (error) {
+                console.error(error);
+                setError(true);
+            }
+        })();
+    }, []);
+
+    const [errorState, setError] = useState<boolean>(false);
+
     return (
         <>
-            <Box>テスト</Box>
-            <Button onClick={getWords}>単語を取得</Button>
-            {words.map((word: any) => (
-                <Box key={word.id}>
-                    {word.English}/
-                    {word.Japanese}/
-                    <Box>
-                        選択肢＝＞
-                        {word.choices[0]}/
-                        {word.choices[1]}/
-                        {word.choices[2]}/
-                        {word.choices[3]}/
-                    </Box>
-                </Box>
-            ))}
+            {errorState &&
+                <Alert status='error' variant='left-accent'>
+                    <AlertIcon />
+                    <AlertTitle>エラーが発生しました</AlertTitle>
+                </Alert>
+            }
+            <Flex h='94vh' justifyContent='center' alignItems='center'>
+                <Button
+                    size='lg'
+                    color='#FE53BB'
+                    isDisabled={errorState}
+                >
+                    <NextLink href='/quiz/1'>
+                        <ChakraLink
+                            fontWeight='bold'
+                            _hover={{ textDecoration: 'none' }}
+                        >
+                            Let&apos;s get started !!!
+                        </ChakraLink>
+                    </NextLink>
+                </Button>
+            </Flex>
         </>
     );
 };

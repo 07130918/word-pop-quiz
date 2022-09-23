@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <>
             <Box
-                height='8vh'
+                height='6vh'
                 backgroundColor='rgba(255, 255, 255, .2)'
                 display='flex'
                 justifyContent='right'
