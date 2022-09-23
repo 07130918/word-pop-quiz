@@ -1,8 +1,8 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { WordObjects } from '../../../types/wordObject';
 import generateQuizResource from '../../libs/generateQuizResource';
 import fisherYatesShuffle from '../../libs/shuffle';
-import type { WordObjects } from '../../types/wordObject';
 
 const API_URL = process.env.API_URL!;
 

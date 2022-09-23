@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import type { WordObject, WordObjects, WordQuizObject, WordQuizObjects } from "../types/wordObject";
+import type { WordObject, WordObjects, WordQuizObject, WordQuizObjects } from "../../types/wordObject";
 import fisherYatesShuffle from './shuffle';
 
 const configureChoices = (choices: string[]): string[] => {
