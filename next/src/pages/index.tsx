@@ -15,7 +15,7 @@ const Home: NextPage = () => {
             try {
                 const res = await axios.get('/api/quizzes');
                 setQuizzes(res.data);
-                console.log('done!!!');
+                setLoading(false);
             } catch (error) {
                 console.error(error);
                 setError(true);
@@ -23,8 +23,9 @@ const Home: NextPage = () => {
         })();
     }, []);
 
+    const [loading, setLoading] = useState(true);
+    const [errorState, setError] = useState(false);
     const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
-    const [errorState, setError] = useState<boolean>(false);
 
     return (
         <>
@@ -38,6 +39,8 @@ const Home: NextPage = () => {
                 <Button
                     size='lg'
                     color='#FE53BB'
+                    isLoading={loading}
+                    loadingText='Let&apos;s get started !!!'
                     isDisabled={errorState}
                 >
                     <NextLink href={{
