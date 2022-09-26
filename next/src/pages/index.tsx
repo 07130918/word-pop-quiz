@@ -45,7 +45,10 @@ const Home: NextPage = () => {
                 >
                     <NextLink href={{
                         pathname: '/quiz/1',
-                        query: { quizzes: JSON.stringify(quizzes) }
+                        query: {
+                            questionNum: 1,
+                            quizzes: JSON.stringify(quizzes)
+                        }
                     }}
                         as='/quiz/1'
                     >
