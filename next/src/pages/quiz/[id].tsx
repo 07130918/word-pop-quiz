@@ -1,3 +1,4 @@
+import { CheckIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Heading, Link as ChakraLink, Progress } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import NextLink from "next/link";
@@ -15,6 +16,8 @@ export const Quiz: NextPage = () => {
             setProgress(questionNum / quizzes.length * 100);
             // questionNumは,配列のインデックスではないので,1を引く
             setQuiz(quizzes[questionNum - 1]);
+            setAnswered(false);
+            setClickedAnswer('');
         } else {
             router.push('/');
         }
@@ -25,13 +28,12 @@ export const Quiz: NextPage = () => {
     const [progress, setProgress] = useState(1);
     const [quiz, setQuiz] = useState<WordQuizObject>();
     const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
+    const [answered, setAnswered] = useState(false);
+    const [clickedAnswer, setClickedAnswer] = useState('');
 
-    const checkTheAnswer = (choice: string) => {
-        if (choice === quiz?.Japanese) {
-            console.log('正解');
-        } else {
-            console.log('不正解');
-        }
+    const checkTheAnswer = (e: any) => {
+        setClickedAnswer(e.target.textContent);
+        setAnswered(true);
     }
 
     return (
@@ -53,10 +55,19 @@ export const Quiz: NextPage = () => {
                                 return (
                                     <Box key={choice} marginTop={4}>
                                         <Button
-                                            colorScheme='teal'
+                                            colorScheme={
+                                                quiz?.Japanese === choice && answered
+                                                    ? 'red'
+                                                    : 'teal'
+                                            }
                                             size='lg'
-                                            onClick={() => checkTheAnswer(choice)}
+                                            onClick={(e) => checkTheAnswer(e)}
+                                            disabled={answered}
                                         >
+                                            {clickedAnswer === choice &&
+                                                <CheckIcon />
+                                            }
+
                                             {choice}
                                         </Button>
                                     </Box>
@@ -64,7 +75,11 @@ export const Quiz: NextPage = () => {
                             })}
                         </Flex>
                         <Box marginTop={4}>
-                            <Button size='lg' marginRight={4}>
+                            <Button
+                                size='lg'
+                                marginRight={4}
+                                disabled={!answered}
+                            >
                                 <NextLink href={{
                                     pathname: `/quiz/${questionNum + 1}`,
                                     query: {
@@ -82,7 +97,7 @@ export const Quiz: NextPage = () => {
                                 </NextLink>
                             </Button>
                             {quiz?.url &&
-                                <Button size='lg'>
+                                <Button size='lg' disabled={!answered}>
                                     <ChakraLink
                                         href={`${quiz?.url}`}
                                         target='_blank'
