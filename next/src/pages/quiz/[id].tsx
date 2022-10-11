@@ -18,6 +18,7 @@ export const Quiz: NextPage = () => {
         } else {
             router.push('/');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
     const [questionNum, setQuestionNum] = useState(1);
@@ -50,23 +51,20 @@ export const Quiz: NextPage = () => {
                         <Flex flexDirection='column' marginTop={10}>
                             {quiz?.choices.map((choice) => {
                                 return (
-                                    <>
-                                        <Box marginTop={4} key={choice}>
-                                            <Button
-                                                colorScheme='teal'
-                                                size='lg'
-                                                onClick={() => checkTheAnswer(choice)}
-                                            >
-                                                {choice}
-                                            </Button>
-                                        </Box>
-                                    </>
+                                    <Box key={choice} marginTop={4}>
+                                        <Button
+                                            colorScheme='teal'
+                                            size='lg'
+                                            onClick={() => checkTheAnswer(choice)}
+                                        >
+                                            {choice}
+                                        </Button>
+                                    </Box>
                                 )
                             })}
                         </Flex>
                         <Box marginTop={4}>
                             <Button size='lg' marginRight={4}>
-                                {/* <NextLink href={`/quiz/${questionNum + 1}`}> */}
                                 <NextLink href={{
                                     pathname: `/quiz/${questionNum + 1}`,
                                     query: {
@@ -84,7 +82,7 @@ export const Quiz: NextPage = () => {
                                 </NextLink>
                             </Button>
                             {quiz?.url &&
-                                <Button>
+                                <Button size='lg'>
                                     <ChakraLink
                                         href={`${quiz?.url}`}
                                         target='_blank'
