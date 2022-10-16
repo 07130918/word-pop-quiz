@@ -40,7 +40,7 @@ const Home: NextPage = () => {
                     size='lg'
                     color='#FE53BB'
                     isLoading={loading}
-                    loadingText='Let&apos;s get started !!!'
+                    loadingText='Let&apos;s get started!!!'
                     isDisabled={errorState}
                 >
                     <NextLink href={{

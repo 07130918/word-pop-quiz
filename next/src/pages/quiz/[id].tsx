@@ -8,12 +8,14 @@ import type { WordQuizObject, WordQuizObjects } from '../../types/wordObject';
 
 export const Quiz: NextPage = () => {
     const router = useRouter();
+
     useEffect(() => {
         if (router.query.quizzes) {
             const quizzes = JSON.parse(router.query.quizzes as string);
-            setQuizzes(quizzes);
-
             const questionNum = Number(router.query.questionNum);
+            if (questionNum > quizzes.length) router.push('/Goal');
+
+            setQuizzes(quizzes);
             setQuestionNum(questionNum);
             setProgress(questionNum / quizzes.length * 100);
             // questionNumは,配列のインデックスではないので,1を引く
@@ -21,17 +23,18 @@ export const Quiz: NextPage = () => {
             setAnswered(false);
             setClickedAnswer('');
         } else {
+            // /quiz/[id]にアクセスしたときに,クエリがない場合は,トップページに戻す
             router.push('/');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
-    const [questionNum, setQuestionNum] = useState(1);
-    const [progress, setProgress] = useState(1);
-    const [quiz, setQuiz] = useState<WordQuizObject>();
-    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
-    const [answered, setAnswered] = useState(false);
-    const [clickedAnswer, setClickedAnswer] = useState('');
+    const [questionNum, setQuestionNum] = useState(1);           // クイズが今何問目かを管理する
+    const [progress, setProgress] = useState(1);                 // プログレスバーの値を管理する
+    const [quiz, setQuiz] = useState<WordQuizObject>();          // クイズの情報を管理する
+    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]); // 全てのクイズの情報を管理する
+    const [answered, setAnswered] = useState(false);             // 回答したかどうかを管理する
+    const [clickedAnswer, setClickedAnswer] = useState('');      // 回答した選択肢を管理する
 
     const checkTheAnswer = (e: any) => {
         setClickedAnswer(e.target.textContent);

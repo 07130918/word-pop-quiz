@@ -12,7 +12,7 @@ const Header = () => {
                 alignItems='center'
             >
                 <Button
-                    marginRight={10}
+                    marginRight={4}
                     colorScheme='teal'
                 >
                     <NextLink href='/'>
