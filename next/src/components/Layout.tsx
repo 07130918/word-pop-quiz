@@ -8,8 +8,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
             <Box
                 minH={'100vh'}
                 bgImage="url('/backgroundImage.jpeg')"
-                bgPosition="center"
-                bgRepeat="no-repeat"
+                bgPosition='center'
+                bgRepeat='no-repeat'
             >
                 <Header />
                 {children}

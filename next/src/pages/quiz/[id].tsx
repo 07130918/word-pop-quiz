@@ -12,7 +12,9 @@ export const Quiz: NextPage = () => {
         if (router.query.quizzes) {
             const quizzes = JSON.parse(router.query.quizzes as string);
             setQuizzes(quizzes);
-            setQuestionNum(Number(router.query.questionNum));
+
+            const questionNum = Number(router.query.questionNum);
+            setQuestionNum(questionNum);
             setProgress(questionNum / quizzes.length * 100);
             // questionNumは,配列のインデックスではないので,1を引く
             setQuiz(quizzes[questionNum - 1]);
@@ -97,9 +99,17 @@ export const Quiz: NextPage = () => {
                                 </NextLink>
                             </Button>
                             {quiz?.url &&
-                                <Button size='lg' disabled={!answered}>
+                                <Button
+                                    size='lg'
+                                    disabled={!answered}
+                                    colorScheme={
+                                        quiz?.Japanese !== clickedAnswer && answered
+                                            ? 'red'
+                                            : 'gray'
+                                    }
+                                >
                                     <ChakraLink
-                                        href={`${quiz?.url}`}
+                                        href={quiz?.url}
                                         target='_blank'
                                         _hover={{ 'textDecoration': 'none' }}
                                     >
