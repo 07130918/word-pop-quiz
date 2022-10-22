@@ -6,7 +6,6 @@ const Goal: NextPage = () => {
     return (
         <>
             <Flex h='94vh' justifyContent='center' alignItems='center'>
-                <Heading></Heading>
                 <Button
                     size='lg'
                     color='#5386fe'
