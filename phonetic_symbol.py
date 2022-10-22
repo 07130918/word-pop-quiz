@@ -24,8 +24,7 @@ def get_phonetic_symbols(spread_sheet_row):
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--incognito')
-    driver = webdriver.Chrome(
-        ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     url = "https://ejje.weblio.jp/"
     driver.get(url)
 
@@ -44,7 +43,8 @@ def get_phonetic_symbols(spread_sheet_row):
         search_box.send_keys(Keys.RETURN)
         sleep(1)
         try:
-            phonetic_symbol_list.append(driver.find_elements_by_class_name("phoneticEjjeDesc")[0].text)
+            phonetic_symbol_list.append(
+                driver.find_elements_by_class_name("phoneticEjjeDesc")[0].text)
         except Exception:
             phonetic_symbol_list.append("なし")
         print(f'progress: {i+1} / {num_of_lines}')
