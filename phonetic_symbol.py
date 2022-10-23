@@ -1,5 +1,4 @@
 import os
-from time import sleep
 
 import requests
 from dotenv import load_dotenv
@@ -8,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -16,39 +15,44 @@ def main():
     load_dotenv()
     API_URL = os.environ['API_URL']
     res = requests.get(API_URL)
-    phonetic_symbol_list = get_phonetic_symbols(res.json())
+    driver = configure_driver()
+    phonetic_symbol_list = get_phonetic_symbols(driver, res.json())
     write_list_object_to("phonetic_symbols.txt", phonetic_symbol_list)
 
 
-def get_phonetic_symbols(spread_sheet_row):
+def configure_driver():
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--incognito')
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    return webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+
+def get_phonetic_symbols(driver, spread_sheet_row):
     url = "https://ejje.weblio.jp/"
     driver.get(url)
 
+    wait = WebDriverWait(driver, 60)
     phonetic_symbol_list = []
     num_of_lines = len(spread_sheet_row)
 
     for i in range(num_of_lines):
         # 単語の検索→発音記号を取得、のループ
-        WebDriverWait(driver, 60).until(
-            EC.element_to_be_clickable((By.ID, 'searchWord')))
-        search_box = driver.find_element_by_id("searchWord")
+        search_box = wait.until(
+            lambda driver: driver.find_element(By.ID, 'searchWord'))
+        wait.until(EC.element_to_be_clickable((By.ID, 'searchWord')))
         if i > 0:
             search_box.clear()
         search_box.click()
         search_box.send_keys(spread_sheet_row[i]["English"])
         search_box.send_keys(Keys.RETURN)
-        sleep(1)
         try:
-            phonetic_symbol_list.append(
-                driver.find_elements_by_class_name("phoneticEjjeDesc")[0].text)
+            phonetic_symbol_list.append(wait.until(
+                lambda driver: driver.find_element(By.CLASS_NAME, 'phoneticEjjeDesc').text)
+            )
         except Exception:
-            phonetic_symbol_list.append("なし")
-        print(f'progress: {i+1} / {num_of_lines}')
+            phonetic_symbol_list.append("-")
 
+        print(f'progress: {i+1} / {num_of_lines} : {phonetic_symbol_list[i]}')
     return phonetic_symbol_list
 
 
@@ -58,6 +62,6 @@ def write_list_object_to(file_name, list_object):
 
 
 if __name__ == '__main__':
-    """7/2現状466まで取得済み
+    """10/23現状489まで取得済み
     """
     main()
