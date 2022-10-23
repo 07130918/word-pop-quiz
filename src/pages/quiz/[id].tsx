@@ -1,7 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, Heading, Link as ChakraLink, Progress } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Progress } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import NextLink from "next/link";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import type { WordQuizObject, WordQuizObjects } from '../../types/wordObject';
@@ -60,14 +59,14 @@ export const Quiz: NextPage = () => {
                                 return (
                                     <Box key={choice} marginTop={4}>
                                         <Button
+                                            size='lg'
                                             colorScheme={
                                                 quiz?.Japanese === choice && answered
                                                     ? 'red'
                                                     : 'teal'
                                             }
-                                            size='lg'
-                                            onClick={(e) => checkTheAnswer(e)}
                                             disabled={answered}
+                                            onClick={(e) => checkTheAnswer(e)}
                                         >
                                             {clickedAnswer === choice &&
                                                 <CheckIcon />
@@ -84,40 +83,32 @@ export const Quiz: NextPage = () => {
                                 size='lg'
                                 marginRight={4}
                                 disabled={!answered}
-                            >
-                                <NextLink href={{
-                                    pathname: `/quiz/${questionNum + 1}`,
-                                    query: {
-                                        questionNum: questionNum + 1,
-                                        quizzes: JSON.stringify(quizzes)
-                                    }
+                                onClick={() => {
+                                    router.push({
+                                        pathname: `/quiz/${questionNum + 1}`,
+                                        query: {
+                                            questionNum: questionNum + 1,
+                                            quizzes: JSON.stringify(quizzes),
+                                        }
+                                    },
+                                        `/quiz/${questionNum + 1}`
+                                    );
                                 }}
-                                    as={`/quiz/${questionNum + 1}`}
-                                >
-                                    <ChakraLink
-                                        _hover={{ 'textDecoration': 'none' }}
-                                    >
-                                        Move to next
-                                    </ChakraLink>
-                                </NextLink>
+                            >
+                                Move to next
                             </Button>
                             {quiz?.url &&
                                 <Button
                                     size='lg'
-                                    disabled={!answered}
                                     colorScheme={
                                         quiz?.Japanese !== clickedAnswer && answered
-                                            ? 'red'
-                                            : 'gray'
+                                        ? 'red'
+                                        : 'gray'
                                     }
+                                    disabled={!answered}
+                                    onClick={() => window.open(quiz.url)}
                                 >
-                                    <ChakraLink
-                                        href={quiz?.url}
-                                        target='_blank'
-                                        _hover={{ 'textDecoration': 'none' }}
-                                    >
-                                        Go to definition
-                                    </ChakraLink>
+                                    Go to definition
                                 </Button>
                             }
                         </Box>

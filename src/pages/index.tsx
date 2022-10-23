@@ -1,15 +1,19 @@
 import {
     Alert,
     AlertIcon,
-    AlertTitle, Button, Flex, Link as ChakraLink
+    AlertTitle, Button, Flex
 } from '@chakra-ui/react';
 import axios from 'axios';
 import type { NextPage } from 'next';
-import NextLink from "next/link";
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import type { WordQuizObjects } from '../types/wordObject';
 
 const Home: NextPage = () => {
+    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
+    const [loading, setLoading] = useState(true);
+    const [errorState, setError] = useState(false);
+
     useEffect(() => {
         (async () => {
             try {
@@ -23,10 +27,7 @@ const Home: NextPage = () => {
         })();
     }, []);
 
-    const [loading, setLoading] = useState(true);
-    const [errorState, setError] = useState(false);
-    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
-
+    const router = useRouter();
     return (
         <>
             {errorState &&
@@ -42,23 +43,18 @@ const Home: NextPage = () => {
                     isLoading={loading}
                     loadingText='Let&apos;s get started!!!'
                     isDisabled={errorState}
-                >
-                    <NextLink href={{
+                    onClick={() => router.push({
                         pathname: '/quiz/1',
                         query: {
                             questionNum: 1,
                             quizzes: JSON.stringify(quizzes)
                         }
-                    }}
-                        as='/quiz/1'
-                    >
-                        <ChakraLink
-                            fontWeight='bold'
-                            _hover={{ textDecoration: 'none' }}
-                        >
-                            Let&apos;s get started !!!
-                        </ChakraLink>
-                    </NextLink>
+                    },
+                        '/quiz/1'
+                    )}
+
+                >
+                    Let&apos;s get started !!!
                 </Button>
             </Flex>
         </>

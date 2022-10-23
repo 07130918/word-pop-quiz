@@ -1,25 +1,19 @@
+import { Button, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import { Flex, Button, Link as ChakraLink, Heading } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 const Goal: NextPage = () => {
+    const router = useRouter();
+
     return (
         <>
             <Flex h='94vh' justifyContent='center' alignItems='center'>
                 <Button
                     size='lg'
                     color='#5386fe'
+                    onClick={() => router.push('/')}
                 >
-                    <NextLink href='/'>
-                        <ChakraLink
-                            fontWeight='bold'
-                            _hover={{ textDecoration: 'none' }}
-                        >
-                            You did an amazing job!
-                            <br />
-                            See ya!
-                        </ChakraLink>
-                    </NextLink>
+                    See ya!
                 </Button>
             </Flex>
         </>
