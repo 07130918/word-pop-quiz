@@ -1,8 +1,12 @@
 import { Box } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import Header from './Header';
 
 const Layout = ({ children }: { children: ReactNode }) => {
+    useEffect(() => {
+        document.title = 'Word pop quiz';
+    });
+
     return (
         <>
             <Box
