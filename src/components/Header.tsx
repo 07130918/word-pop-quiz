@@ -1,7 +1,9 @@
-import { Box, Button, Link as ChakraLink } from '@chakra-ui/react';
-import NextLink from "next/link";
+import { Box, Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+    const router = useRouter();
+
     return (
         <>
             <Box
@@ -14,14 +16,9 @@ const Header = () => {
                 <Button
                     marginRight={4}
                     colorScheme='teal'
+                    onClick={() => router.push('/')}
                 >
-                    <NextLink href='/'>
-                        <ChakraLink
-                            fontWeight='bold'
-                            _hover={{ textDecoration: 'none' }}
-                        >Quit
-                        </ChakraLink>
-                    </NextLink>
+                    Quit
                 </Button>
             </Box>
         </>
