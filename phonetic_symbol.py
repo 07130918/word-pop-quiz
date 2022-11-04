@@ -57,11 +57,9 @@ def get_phonetic_symbols(driver, spread_sheet_row):
 
 
 def write_list_object_to(file_name, list_object):
-    with open(file_name, "a") as f:
+    with open(file_name, "w") as f:
         f.write('\n'.join(list_object))
 
 
 if __name__ == '__main__':
-    """10/23現状489まで取得済み
-    """
     main()
