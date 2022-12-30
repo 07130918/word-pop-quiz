@@ -8,8 +8,8 @@ const API_URL = process.env.API_URL!;
 
 const quizzes = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const _res = await axios.get(API_URL);
-        const orderlyWordObjects: WordObjects = _res.data;
+        const axiosRes = await axios.get<WordObjects>(API_URL);
+        const orderlyWordObjects = axiosRes.data;
         const wordQuizObject = generateQuizResource(orderlyWordObjects);
         res.status(200).json(fisherYatesShuffle(wordQuizObject));
     } catch (error) {
