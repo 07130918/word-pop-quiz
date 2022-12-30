@@ -42,7 +42,7 @@ export const Quiz: NextPage = () => {
 
     return (
         <>
-            <Flex w='90vw' m='auto' marginTop={10}>
+            <Flex w='90vw' m='auto' mt={10}>
                 <Box>
                     <Box w='90vw'>
                         <Heading>Question {questionNum}</Heading>
@@ -52,33 +52,30 @@ export const Quiz: NextPage = () => {
                             colorScheme='pink'
                         />
                     </Box>
-                    <Box marginTop={10}>
+                    <Box mt={10}>
                         <Heading>{quiz?.English}</Heading>
-                        <Flex flexDirection='column' marginTop={10}>
-                            {quiz?.choices.map((choice) => {
-                                return (
-                                    <Box key={choice} marginTop={4}>
-                                        <Button
-                                            size='lg'
-                                            colorScheme={
-                                                quiz?.Japanese === choice && answered
-                                                    ? 'red'
-                                                    : 'teal'
-                                            }
-                                            disabled={answered}
-                                            onClick={(e) => checkTheAnswer(e)}
-                                        >
-                                            {clickedAnswer === choice &&
-                                                <CheckIcon />
-                                            }
-
-                                            {choice}
-                                        </Button>
-                                    </Box>
-                                )
-                            })}
+                        <Flex flexDirection='column' mt={10}>
+                            {quiz?.choices.map((choice) => (
+                                <Box key={choice} mt={4}>
+                                    <Button
+                                        size='lg'
+                                        colorScheme={
+                                            quiz?.Japanese === choice && answered
+                                                ? 'red'
+                                                : 'teal'
+                                        }
+                                        disabled={answered}
+                                        onClick={(e) => checkTheAnswer(e)}
+                                    >
+                                        {clickedAnswer === choice &&
+                                            <CheckIcon />
+                                        }
+                                        {choice}
+                                    </Button>
+                                </Box>
+                            ))}
                         </Flex>
-                        <Box marginTop={4}>
+                        <Box mt={4}>
                             <Button
                                 size='lg'
                                 marginRight={4}
@@ -102,8 +99,8 @@ export const Quiz: NextPage = () => {
                                     size='lg'
                                     colorScheme={
                                         quiz?.Japanese !== clickedAnswer && answered
-                                        ? 'red'
-                                        : 'gray'
+                                            ? 'red'
+                                            : 'gray'
                                     }
                                     disabled={!answered}
                                     onClick={() => window.open(quiz.url)}
