@@ -1,14 +1,14 @@
 import { Box } from '@chakra-ui/react';
-import { ReactNode, useEffect } from 'react';
+import Head from 'next/head';
+import { ReactNode } from 'react';
 import Header from './Header';
 
 const Layout = ({ children }: { children: ReactNode }) => {
-    useEffect(() => {
-        document.title = 'Word pop quiz';
-    });
-
     return (
         <>
+            <Head>
+                <title>Word pop quiz</title>
+            </Head>
             <Box
                 minH={'100vh'}
                 bgImage="url('/backgroundImage.jpeg')"

@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get('/api/quizzes');
+                const res = await axios.get<WordQuizObjects>('/api/quizzes');
                 setQuizzes(res.data);
                 setLoading(false);
             } catch (error) {
