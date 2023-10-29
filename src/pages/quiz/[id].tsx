@@ -45,7 +45,7 @@ export const Quiz: NextPage = () => {
             <Flex w='90vw' m='auto' mt={10}>
                 <Box>
                     <Box w='90vw'>
-                        <Heading>Question {questionNum}</Heading>
+                        <Heading color='whiteAlpha.900'>Question {questionNum}</Heading>
                         <Progress
                             value={progress}
                             size='xs'
@@ -53,7 +53,7 @@ export const Quiz: NextPage = () => {
                         />
                     </Box>
                     <Box mt={10}>
-                        <Heading>{quiz?.English}</Heading>
+                        <Heading color='whiteAlpha.900'>{quiz?.English}</Heading>
                         <Flex flexDirection='column' mt={10}>
                             {quiz?.choices.map((choice) => (
                                 <Box key={choice} mt={4}>
