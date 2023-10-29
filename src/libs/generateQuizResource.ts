@@ -1,7 +1,7 @@
-import type { WordObjects, WordQuizObjects } from "../types/wordObject";
+import type { WordObject, WordQuizObject } from "../types/wordObject";
 import fisherYatesShuffle from './shuffle';
 
-const generateQuizResource = (orderlyWordObjects: WordObjects): WordQuizObjects => {
+const generateQuizResource = (orderlyWordObjects: WordObject[]): WordQuizObject[] => {
     const allChoices = orderlyWordObjects.map((wordObject) => wordObject.english);
 
     return orderlyWordObjects.map((wordObject) => {
