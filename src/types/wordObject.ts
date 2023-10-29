@@ -1,12 +1,12 @@
 interface WordObject {
-    English: string;
-    Japanese: string;
+    english: string;
+    definition: string;
     url: string;
 }
 
 interface WordQuizObject {
-    English: string;
-    Japanese: string;
+    english: string;
+    definition: string;
     url: string;
     choices: string[];
 }

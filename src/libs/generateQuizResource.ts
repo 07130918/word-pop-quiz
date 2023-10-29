@@ -2,10 +2,10 @@ import type { WordObjects, WordQuizObjects } from "../types/wordObject";
 import fisherYatesShuffle from './shuffle';
 
 const generateQuizResource = (orderlyWordObjects: WordObjects): WordQuizObjects => {
-    const allChoices = orderlyWordObjects.map((wordObject) => wordObject.Japanese);
+    const allChoices = orderlyWordObjects.map((wordObject) => wordObject.english);
 
     return orderlyWordObjects.map((wordObject) => {
-        const correctChoice = wordObject.Japanese;
+        const correctChoice = wordObject.english;
         const dummyChoices = configureUniqueChoices(
             [...allChoices, correctChoice].filter((value, _, self) => (
                 // 選択肢に正解が含まれている場合は、その正解を除いた配列を返す。
@@ -17,8 +17,8 @@ const generateQuizResource = (orderlyWordObjects: WordObjects): WordQuizObjects 
         );
 
         return {
-            English: wordObject.English,
-            Japanese: wordObject.Japanese,
+            english: wordObject.english,
+            definition: wordObject.definition,
             url: wordObject.url,
             choices,
         };

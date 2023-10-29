@@ -8,10 +8,10 @@ const API_URL = process.env.API_URL!;
 
 const quizzes = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const axiosRes = await axios.get<WordObjects>(API_URL);
-        const orderlyWordObjects = axiosRes.data;
-        const wordQuizObject = generateQuizResource(orderlyWordObjects);
-        res.status(200).json(fisherYatesShuffle(wordQuizObject));
+        const response = await axios.get<WordObjects>(API_URL);
+        const quizzes = generateQuizResource(response.data);
+        const shuffledQuizzes = fisherYatesShuffle(quizzes);
+        res.status(200).json(shuffledQuizzes);
     } catch (error) {
         console.error(error);
         res.status(500).json('通信エラーが発生しました。');
