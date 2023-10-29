@@ -10,10 +10,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 <title>Word pop quiz</title>
             </Head>
             <Box
-                minH={'100vh'}
+                h='100vh'
+                w='100vw'
                 bgImage="url('/backgroundImage.jpeg')"
                 bgPosition='center'
                 bgRepeat='no-repeat'
+                bgSize='cover'
             >
                 <Header />
                 {children}
