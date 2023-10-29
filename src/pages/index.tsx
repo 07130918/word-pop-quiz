@@ -7,17 +7,17 @@ import axios from 'axios';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import type { WordQuizObjects } from '../types/wordObject';
+import type { WordQuizObject } from '../types/wordObject';
 
 const Home: NextPage = () => {
-    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]);
+    const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
     const [loading, setLoading] = useState(true);
     const [errorState, setError] = useState(false);
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get<WordQuizObjects>('/api/quizzes');
+                const res = await axios.get<WordQuizObject[]>('/api/quizzes');
                 setQuizzes(res.data);
                 setLoading(false);
             } catch (error) {

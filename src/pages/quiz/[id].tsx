@@ -3,10 +3,22 @@ import { Box, Button, Flex, Heading, Progress } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import type { WordQuizObject, WordQuizObjects } from '../../types/wordObject';
+import type { WordQuizObject } from '../../types/wordObject';
 
 export const Quiz: NextPage = () => {
     const router = useRouter();
+    // プログレスバーの値を管理する
+    const [progress, setProgress] = useState(1);
+    // クイズが今何問目かを管理する
+    const [questionNum, setQuestionNum] = useState(1);
+    // 全てのクイズの情報を管理する
+    const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
+    // クイズの情報を管理する
+    const [quiz, setQuiz] = useState<WordQuizObject>();
+    // 回答したかどうかを管理する
+    const [answered, setAnswered] = useState(false);
+    // 回答した選択肢を管理する
+    const [clickedAnswer, setClickedAnswer] = useState('');
 
     useEffect(() => {
         if (router.query.quizzes) {
@@ -28,13 +40,6 @@ export const Quiz: NextPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
-    const [questionNum, setQuestionNum] = useState(1);           // クイズが今何問目かを管理する
-    const [progress, setProgress] = useState(1);                 // プログレスバーの値を管理する
-    const [quiz, setQuiz] = useState<WordQuizObject>();          // クイズの情報を管理する
-    const [quizzes, setQuizzes] = useState<WordQuizObjects>([]); // 全てのクイズの情報を管理する
-    const [answered, setAnswered] = useState(false);             // 回答したかどうかを管理する
-    const [clickedAnswer, setClickedAnswer] = useState('');      // 回答した選択肢を管理する
-
     const checkTheAnswer = (e: any) => {
         setClickedAnswer(e.target.textContent);
         setAnswered(true);
@@ -53,14 +58,14 @@ export const Quiz: NextPage = () => {
                         />
                     </Box>
                     <Box mt={10}>
-                        <Heading color='whiteAlpha.900'>{quiz?.English}</Heading>
+                        <Heading color='whiteAlpha.900'>{quiz?.definition}</Heading>
                         <Flex flexDirection='column' mt={10}>
                             {quiz?.choices.map((choice) => (
                                 <Box key={choice} mt={4}>
                                     <Button
                                         size='lg'
                                         colorScheme={
-                                            quiz?.Japanese === choice && answered
+                                            quiz.english === choice && answered
                                                 ? 'red'
                                                 : 'teal'
                                         }
@@ -98,7 +103,7 @@ export const Quiz: NextPage = () => {
                                 <Button
                                     size='lg'
                                     colorScheme={
-                                        quiz?.Japanese !== clickedAnswer && answered
+                                        quiz.english !== clickedAnswer && answered
                                             ? 'red'
                                             : 'gray'
                                     }
