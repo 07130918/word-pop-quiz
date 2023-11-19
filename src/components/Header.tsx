@@ -3,7 +3,7 @@ import {
     AlertDialog, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter,
     AlertDialogHeader, AlertDialogOverlay, Button, HStack, useDisclosure
 } from '@chakra-ui/react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useRef } from 'react';
 
 const Header = () => {
@@ -60,4 +60,4 @@ const Header = () => {
     );
 };
 
-export default Header
+export default Header;
