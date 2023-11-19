@@ -1,5 +1,6 @@
 'use client';
 import { QuizzesContext } from '@/hooks/quizzes';
+import fisherYatesShuffle from '@/lib/shuffle';
 import {
     Alert,
     AlertIcon,
@@ -18,13 +19,21 @@ import { useContext, useEffect, useState } from 'react';
 
 export default function Home() {
     const { quizzes, setQuizzes, isLoading, error } = useContext(QuizzesContext);
-    const [range, setRange] = useState<{ min: number, max: number }>({ min: 1, max: 1 });
-    const router = useRouter();
+    const [range, setRange] = useState<{ min: number, max: number }>({ min: 1, max: 500 });
+
     useEffect(() => {
         if (quizzes.length > 0) {
             setRange({ min: 1, max: quizzes.length });
         }
     }, [quizzes]);
+
+    const router = useRouter();
+    const moveToQuiz = () => {
+        const shuffledQuizzes = fisherYatesShuffle(quizzes.slice(range.min - 1, range.max));
+        setQuizzes(shuffledQuizzes);
+        router.push('/quiz/1')
+    };
+
     return (
         <>
             {error && (
@@ -73,7 +82,7 @@ export default function Home() {
                     isLoading={isLoading}
                     isDisabled={error}
                     loadingText='Let&apos;s get started!!!'
-                    onClick={() => router.push('/quiz/1')}
+                    onClick={() => moveToQuiz()}
                 >
                     Let&apos;s get started !!!
                 </Button>
