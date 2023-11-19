@@ -10,7 +10,6 @@ export default function Quiz({ params }: { params: { id: string } }) {
     const { quizzes } = useContext(QuizzesContext);
     // クイズが今何問目か
     const currentQuizNum = Number(params.id);
-    const progress = (currentQuizNum / quizzes.length) * 100
     // 今のクイズの情報を管理する
     const [currentQuiz, setCurrentQuiz] = useState<WordQuizObject>();
     // 回答したかどうかを管理する
@@ -36,7 +35,7 @@ export default function Quiz({ params }: { params: { id: string } }) {
                     <Box w='90vw'>
                         <Heading color='whiteAlpha.900'>Question {currentQuizNum}</Heading>
                         <Progress
-                            value={progress}
+                            value={(currentQuizNum / quizzes.length) * 100}
                             size='xs'
                             colorScheme='pink'
                         />
