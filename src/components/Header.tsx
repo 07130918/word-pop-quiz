@@ -1,62 +1,79 @@
 'use client';
 import {
     AlertDialog, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter,
-    AlertDialogHeader, AlertDialogOverlay, Button, HStack, useDisclosure
+    AlertDialogHeader, AlertDialogOverlay,
+    Box,
+    Button,
+    Link as ChakraLink,
+    HStack,
+    useDisclosure
 } from '@chakra-ui/react';
-import { usePathname, useRouter } from 'next/navigation';
+import NextLink from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
+
+const SPREAD_SHEET_LINK = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQznRmPGPj_4QHBBi1Rnej-sOGTc3D6OlMPwH6TUEVWrFzxzLMKnyejLhKT5jxwpk7DNlzaKW4FQcYc/pubhtml?gid=0&single=true"
 
 const Header = () => {
     const router = useRouter();
     const cancelRef = useRef(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
-
     const moveToTop = () => {
         router.push('/');
         onClose();
     };
 
-    const pathName = usePathname();
     return (
-        <>
-            <HStack
-                height='6vh'
-                backgroundColor='rgba(255, 255, 255, .2)'
-                justifyContent='right'
-            >
-                {pathName === '/quiz/[id]' &&
-                    <Button
-                        colorScheme='teal'
-                        mr={4}
-                        onClick={onOpen}
-                    >
-                        Quit
-                    </Button>
-                }
-                <AlertDialog
-                    leastDestructiveRef={cancelRef}
-                    onClose={onClose}
-                    isOpen={isOpen}
-                    isCentered
+        <HStack
+            height='6vh'
+            backgroundColor='rgba(255, 255, 255, .2)'
+            justifyContent='right'
+        >
+            <Box mr={4}>
+                <NextLink
+                    href={SPREAD_SHEET_LINK}
+                    passHref
+                    legacyBehavior
                 >
-                    <AlertDialogOverlay />
-                    <AlertDialogContent>
-                        <AlertDialogHeader>
-                            Are you sure you want to finish?
-                        </AlertDialogHeader>
-                        <AlertDialogCloseButton />
-                        <AlertDialogFooter>
-                            <Button ref={cancelRef} onClick={onClose}>
-                                No
-                            </Button>
-                            <Button colorScheme='red' ml={3} onClick={moveToTop}>
-                                Yes
-                            </Button>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialog>
-            </HStack>
-        </>
+                    <ChakraLink
+                        isExternal
+                        color='#FE53BB'
+                        fontWeight='bold'
+                    >
+                        See the source
+                    </ChakraLink>
+                </NextLink>
+            </Box>
+            <Button
+                colorScheme='teal'
+                mr={4}
+                onClick={onOpen}
+            >
+                Quit
+            </Button>
+            <AlertDialog
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+                isOpen={isOpen}
+                isCentered
+            >
+                <AlertDialogOverlay />
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        Are you sure you want to finish?
+                    </AlertDialogHeader>
+                    <AlertDialogCloseButton />
+                    <AlertDialogFooter>
+                        <Button ref={cancelRef} onClick={onClose}>
+                            No
+                        </Button>
+                        <Button colorScheme='red' ml={3} onClick={moveToTop}>
+                            Yes
+                        </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+        </HStack>
     );
 };
 
