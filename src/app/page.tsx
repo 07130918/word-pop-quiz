@@ -15,17 +15,11 @@ import {
     VStack
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 export default function Home() {
     const { quizzes, setQuizzes, isLoading, error } = useContext(QuizzesContext);
     const [range, setRange] = useState<{ min: number, max: number }>({ min: 1, max: 500 });
-
-    useEffect(() => {
-        if (quizzes.length > 0) {
-            setRange({ min: 1, max: quizzes.length });
-        }
-    }, [quizzes]);
 
     const router = useRouter();
     const moveToQuiz = () => {
