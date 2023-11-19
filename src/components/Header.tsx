@@ -1,8 +1,9 @@
+'use client';
 import {
     AlertDialog, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter,
     AlertDialogHeader, AlertDialogOverlay, Button, HStack, useDisclosure
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { useRef } from 'react';
 
 const Header = () => {
@@ -15,6 +16,7 @@ const Header = () => {
         onClose();
     };
 
+    const pathName = usePathname();
     return (
         <>
             <HStack
@@ -22,7 +24,7 @@ const Header = () => {
                 backgroundColor='rgba(255, 255, 255, .2)'
                 justifyContent='right'
             >
-                {router.pathname === '/quiz/[id]' &&
+                {pathName === '/quiz/[id]' &&
                     <Button
                         colorScheme='teal'
                         mr={4}
