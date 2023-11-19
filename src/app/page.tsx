@@ -3,14 +3,28 @@ import { QuizzesContext } from '@/hooks/quizzes';
 import {
     Alert,
     AlertIcon,
-    AlertTitle, Button, Flex
+    AlertTitle, Button,
+    HStack,
+    NumberDecrementStepper,
+    NumberIncrementStepper,
+    NumberInput,
+    NumberInputField,
+    NumberInputStepper,
+    Text,
+    VStack
 } from '@chakra-ui/react';
-import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Home() {
-    const { isLoading, error } = useContext(QuizzesContext);
+    const { quizzes, setQuizzes, isLoading, error } = useContext(QuizzesContext);
+    const [range, setRange] = useState<{ min: number, max: number }>({ min: 1, max: 1 });
     const router = useRouter();
+    useEffect(() => {
+        if (quizzes.length > 0) {
+            setRange({ min: 1, max: quizzes.length });
+        }
+    }, [quizzes]);
     return (
         <>
             {error && (
@@ -19,7 +33,40 @@ export default function Home() {
                     <AlertTitle>エラーが発生しました</AlertTitle>
                 </Alert>)
             }
-            <Flex h='94vh' justifyContent='center' alignItems='center'>
+            <VStack h='94vh' justifyContent='center'>
+                <HStack>
+                    <Text color='#FE53BB' fontWeight='bold'>Range: </Text>
+                    <NumberInput
+                        bg='white'
+                        w='100px'
+                        borderRadius='md'
+                        value={range.min}
+                        min={1}
+                        max={quizzes.length - 5}
+                        onChange={(_, value) => setRange((prev) => ({ ...prev, min: value }))}
+                    >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                    <NumberInput
+                        bg='white'
+                        w='100px'
+                        borderRadius='md'
+                        value={range.max}
+                        min={5}
+                        max={quizzes.length}
+                        onChange={(_, value) => setRange((prev) => ({ ...prev, max: value }))}
+                    >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                </HStack>
                 <Button
                     size='lg'
                     color='#FE53BB'
@@ -30,7 +77,7 @@ export default function Home() {
                 >
                     Let&apos;s get started !!!
                 </Button>
-            </Flex>
+            </VStack>
         </>
     );
 };
