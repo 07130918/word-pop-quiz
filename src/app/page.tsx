@@ -1,59 +1,32 @@
 'use client';
-import type { WordQuizObject } from '@/types/wordObject';
+import { QuizzesContext } from '@/hooks/quizzes';
 import {
     Alert,
     AlertIcon,
     AlertTitle, Button, Flex
 } from '@chakra-ui/react';
-import axios from 'axios';
-import type { NextPage } from 'next';
+import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
-const Home: NextPage = () => {
-    const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [errorState, setError] = useState(false);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const res = await axios.get<WordQuizObject[]>('/api/quizzes');
-                setQuizzes(res.data);
-                setLoading(false);
-            } catch (error) {
-                console.error(error);
-                setError(true);
-            }
-        })();
-    }, []);
-
+export default function Home() {
+    const { isLoading, error } = useContext(QuizzesContext);
     const router = useRouter();
     return (
         <>
-            {errorState &&
+            {error && (
                 <Alert status='error' variant='left-accent'>
                     <AlertIcon />
                     <AlertTitle>エラーが発生しました</AlertTitle>
-                </Alert>
+                </Alert>)
             }
             <Flex h='94vh' justifyContent='center' alignItems='center'>
                 <Button
                     size='lg'
                     color='#FE53BB'
-                    isLoading={loading}
+                    isLoading={isLoading}
+                    isDisabled={error}
                     loadingText='Let&apos;s get started!!!'
-                    isDisabled={errorState}
-                    onClick={() => router.push({
-                        pathname: '/quiz/1',
-                        query: {
-                            questionNum: 1,
-                            quizzes: JSON.stringify(quizzes)
-                        }
-                    },
-                        '/quiz/1'
-                    )}
-
+                    onClick={() => router.push('/quiz/1')}
                 >
                     Let&apos;s get started !!!
                 </Button>
@@ -61,5 +34,3 @@ const Home: NextPage = () => {
         </>
     );
 };
-
-export default Home
