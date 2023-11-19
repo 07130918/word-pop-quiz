@@ -1,6 +1,11 @@
 import type { WordObject, WordQuizObject } from "@/types/wordObject";
 import fisherYatesShuffle from '@/lib/shuffle';
 
+/**
+ * @description 単語オブジェクトの配列からクイズオブジェクトの配列を生成する。
+ * @param { WordObject[] } orderlyWordObjects - 単語オブジェクトの配列
+ * @returns { WordQuizObject[] } - クイズオブジェクトの配列
+ */
 export const generateQuizResource = (orderlyWordObjects: WordObject[]): WordQuizObject[] => {
     const allChoices = orderlyWordObjects.map((wordObject) => wordObject.english);
 
