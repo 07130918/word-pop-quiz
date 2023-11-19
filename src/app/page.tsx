@@ -1,3 +1,5 @@
+'use client';
+import type { WordQuizObject } from '@/types/wordObject';
 import {
     Alert,
     AlertIcon,
@@ -5,9 +7,8 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import type { WordQuizObject } from '../types/wordObject';
 
 const Home: NextPage = () => {
     const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
