@@ -1,4 +1,4 @@
-import type { WordObject } from '@/types/wordObject';
+import type { WordObject, WordQuizObject } from '@/types/wordObject';
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
@@ -6,8 +6,10 @@ import useSWR from 'swr';
 
 export const QuizzesContext = createContext(
     {} as {
-        quizzes: WordObject[];
-        setQuizzes: Dispatch<SetStateAction<WordObject[]>>;
+        quizzesOrigin: WordObject[];
+        setQuizzesOrigin: Dispatch<SetStateAction<WordObject[]>>;
+        quizzes: WordQuizObject[];
+        setQuizzes: Dispatch<SetStateAction<WordQuizObject[]>>;
         isLoading: boolean;
         error: any;
     },
@@ -19,7 +21,8 @@ const fetcher = async (url: string): Promise<WordObject[]> => {
 };
 
 export const useQuizzes = () => {
-    const [quizzes, setQuizzes] = useState<WordObject[]>([]);
+    const [quizzesOrigin, setQuizzesOrigin] = useState<WordObject[]>([]);
+    const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
     const {
         data,
         isLoading,
@@ -28,9 +31,9 @@ export const useQuizzes = () => {
 
     useEffect(() => {
         if (data) {
-            setQuizzes(data);
+            setQuizzesOrigin(data);
         }
     }, [data]);
 
-    return { quizzes, setQuizzes, isLoading, error };
+    return { quizzesOrigin, quizzes, setQuizzes, isLoading, error };
 }

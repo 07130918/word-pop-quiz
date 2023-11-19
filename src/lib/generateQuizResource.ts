@@ -1,7 +1,7 @@
-import type { WordObject, WordQuizObject } from "../types/wordObject";
-import fisherYatesShuffle from './shuffle';
+import type { WordObject, WordQuizObject } from "@/types/wordObject";
+import fisherYatesShuffle from '@/lib/shuffle';
 
-const generateQuizResource = (orderlyWordObjects: WordObject[]): WordQuizObject[] => {
+export const generateQuizResource = (orderlyWordObjects: WordObject[]): WordQuizObject[] => {
     const allChoices = orderlyWordObjects.map((wordObject) => wordObject.english);
 
     return orderlyWordObjects.map((wordObject) => {
@@ -43,5 +43,3 @@ const configureChoices = (choices: string[]): string[] => {
     }
     return dummyChoices;
 }
-
-export default generateQuizResource;
