@@ -1,3 +1,6 @@
+/**
+ * @description Fisher-Yatesのアルゴリズムで配列の要素をシャッフルする。
+ */
 const fisherYatesShuffle = <T>(arr: T[]): T[] => {
     const newArr = [...arr];
     for (let i = newArr.length - 1; i > 0; i--) {
