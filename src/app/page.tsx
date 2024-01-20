@@ -15,11 +15,15 @@ import {
     VStack
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Home() {
     const { quizzes, setQuizzes, isLoading, error } = useContext(QuizzesContext);
-    const [range, setRange] = useState<{ min: number, max: number }>({ min: 1, max: 500 });
+    const [range, setRange] = useState<{ min: number, max: number }>({ min: 0, max: 0 });
+
+    useEffect(() => {
+        setRange({ min: 1, max: quizzes.length });
+    }, [quizzes]);
 
     const router = useRouter();
     const moveToQuiz = () => {
@@ -38,7 +42,7 @@ export default function Home() {
             }
             <VStack h='94vh' justifyContent='center'>
                 <HStack>
-                    <Text color='#FE53BB' fontWeight='bold'>Range: </Text>
+                    <Text color='#FE53BB' fontWeight='bold'>Range:</Text>
                     <NumberInput
                         bg='white'
                         w='100px'
@@ -46,7 +50,10 @@ export default function Home() {
                         value={range.min}
                         min={1}
                         max={quizzes.length - 5}
-                        onChange={(_, value) => setRange((prev) => ({ ...prev, min: value }))}
+                        onChange={(_, value) => setRange((prev) => ({
+                            ...prev,
+                            min: isNaN(value) ? 1 : value
+                        }))}
                     >
                         <NumberInputField />
                         <NumberInputStepper>
@@ -61,7 +68,10 @@ export default function Home() {
                         value={range.max}
                         min={5}
                         max={quizzes.length}
-                        onChange={(_, value) => setRange((prev) => ({ ...prev, max: value }))}
+                        onChange={(_, value) => setRange((prev) => ({
+                            ...prev,
+                            max: isNaN(value) ? quizzes.length : value
+                        }))}
                     >
                         <NumberInputField />
                         <NumberInputStepper>
