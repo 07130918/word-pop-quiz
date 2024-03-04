@@ -11,7 +11,7 @@ const Footer = () => {
             bg='rgba(255, 255, 255, .2)'
         >
             <Stack
-                direction={{ base: 'column', md: 'row' }}
+                direction='row'
                 spacing={4}
                 justifyContent='flex-start'
                 alignItems='center'
