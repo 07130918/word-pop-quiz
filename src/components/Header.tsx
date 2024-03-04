@@ -1,18 +1,23 @@
 'use client';
 import {
-    AlertDialog, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter,
-    AlertDialogHeader, AlertDialogOverlay,
+    AlertDialog,
+    AlertDialogCloseButton,
+    AlertDialogContent,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogOverlay,
     Box,
     Button,
     Link as ChakraLink,
     HStack,
-    useDisclosure
+    useDisclosure,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 
-const SPREAD_SHEET_LINK = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQznRmPGPj_4QHBBi1Rnej-sOGTc3D6OlMPwH6TUEVWrFzxzLMKnyejLhKT5jxwpk7DNlzaKW4FQcYc/pubhtml?gid=0&single=true"
+const SPREAD_SHEET_LINK =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQznRmPGPj_4QHBBi1Rnej-sOGTc3D6OlMPwH6TUEVWrFzxzLMKnyejLhKT5jxwpk7DNlzaKW4FQcYc/pubhtml?gid=0&single=true';
 
 const Header = () => {
     const router = useRouter();
@@ -24,31 +29,15 @@ const Header = () => {
     };
 
     return (
-        <HStack
-            height='6vh'
-            backgroundColor='rgba(255, 255, 255, .2)'
-            justifyContent='right'
-        >
+        <HStack h='8vh' backgroundColor='rgba(255, 255, 255, .2)' justifyContent='right'>
             <Box mr={4}>
-                <NextLink
-                    href={SPREAD_SHEET_LINK}
-                    passHref
-                    legacyBehavior
-                >
-                    <ChakraLink
-                        isExternal
-                        color='#FE53BB'
-                        fontWeight='bold'
-                    >
+                <NextLink href={SPREAD_SHEET_LINK} passHref legacyBehavior>
+                    <ChakraLink isExternal color='#FE53BB' fontWeight='bold'>
                         See the source
                     </ChakraLink>
                 </NextLink>
             </Box>
-            <Button
-                colorScheme='teal'
-                mr={4}
-                onClick={onOpen}
-            >
+            <Button colorScheme='teal' mr={4} onClick={onOpen}>
                 Quit
             </Button>
             <AlertDialog
@@ -59,9 +48,7 @@ const Header = () => {
             >
                 <AlertDialogOverlay />
                 <AlertDialogContent>
-                    <AlertDialogHeader>
-                        Are you sure you want to finish?
-                    </AlertDialogHeader>
+                    <AlertDialogHeader>Are you sure you want to finish?</AlertDialogHeader>
                     <AlertDialogCloseButton />
                     <AlertDialogFooter>
                         <Button ref={cancelRef} onClick={onClose}>

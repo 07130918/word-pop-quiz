@@ -21,11 +21,7 @@ const fetcher = async (url: string): Promise<WordObject[]> => {
 
 export const useQuizzes = () => {
     const [quizzes, setQuizzes] = useState<WordQuizObject[]>([]);
-    const {
-        data,
-        isLoading,
-        error,
-    } = useSWR('/api/quizzes', fetcher);
+    const { data, isLoading, error } = useSWR('/api/quizzes', fetcher);
 
     useEffect(() => {
         if (data) {
@@ -34,4 +30,4 @@ export const useQuizzes = () => {
     }, [data]);
 
     return { quizzes, setQuizzes, isLoading, error };
-}
+};

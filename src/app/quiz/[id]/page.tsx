@@ -30,14 +30,14 @@ export default function Quiz({ params }: { params: { id: string } }) {
 
     return (
         <Stack w='90vw' m='auto' mt={10}>
-            <Heading color='whiteAlpha.900'>Question {currentQuizNum}</Heading>
+            <Heading color='cyan.200'>Question {currentQuizNum}</Heading>
             <Progress
                 value={(currentQuizNum / quizzes.length) * 100}
                 size='xs'
                 colorScheme='pink'
             />
             <Stack mt={10}>
-                <Heading color='whiteAlpha.900'>{currentQuiz?.definition}</Heading>
+                <Heading color='cyan.200'>{currentQuiz?.definition}</Heading>
                 <Stack mt={10}>
                     {currentQuiz?.choices.map((choice) => {
                         const isCorrect = currentQuiz.english === choice && answered;
@@ -46,7 +46,7 @@ export default function Quiz({ params }: { params: { id: string } }) {
                                 <Button
                                     size='lg'
                                     name={choice}
-                                    colorScheme={isCorrect ? 'red' : 'teal'}
+                                    colorScheme={isCorrect ? 'red' : 'blackAlpha'}
                                     isDisabled={answered}
                                     onClick={() => {
                                         setClickedAnswer(choice);
@@ -57,34 +57,35 @@ export default function Quiz({ params }: { params: { id: string } }) {
                                     {choice}
                                 </Button>
                             </Box>
-                        )
+                        );
                     })}
                 </Stack>
                 <Box mt={4}>
                     <Button
-                        size='lg'
                         mr={4}
+                        size='lg'
+                        colorScheme='blackAlpha'
                         isDisabled={!answered}
                         onClick={() => router.push(`/quiz/${currentQuizNum + 1}`)}
                     >
                         Move to next
                     </Button>
-                    {currentQuiz?.url &&
+                    {currentQuiz?.url && (
                         <Button
                             size='lg'
                             colorScheme={
                                 currentQuiz.english !== clickedAnswer && answered
                                     ? 'red'
-                                    : 'gray'
+                                    : 'blackAlpha'
                             }
                             isDisabled={!answered}
                             onClick={() => window.open(currentQuiz.url)}
                         >
                             Go to definition
                         </Button>
-                    }
+                    )}
                 </Box>
             </Stack>
         </Stack>
     );
-};
+}

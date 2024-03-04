@@ -4,7 +4,8 @@ import fisherYatesShuffle from '@/lib/shuffle';
 import {
     Alert,
     AlertIcon,
-    AlertTitle, Button,
+    AlertTitle,
+    Button,
     HStack,
     NumberDecrementStepper,
     NumberIncrementStepper,
@@ -12,14 +13,17 @@ import {
     NumberInputField,
     NumberInputStepper,
     Text,
-    VStack
+    VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 
 export default function Home() {
     const { quizzes, setQuizzes, isLoading, error } = useContext(QuizzesContext);
-    const [range, setRange] = useState<{ min: number, max: number }>({ min: 0, max: 0 });
+    const [range, setRange] = useState<{ min: number; max: number }>({
+        min: 0,
+        max: 0,
+    });
 
     useEffect(() => {
         setRange({ min: 1, max: quizzes.length });
@@ -29,7 +33,7 @@ export default function Home() {
     const moveToQuiz = () => {
         const shuffledQuizzes = fisherYatesShuffle(quizzes.slice(range.min - 1, range.max));
         setQuizzes(shuffledQuizzes);
-        router.push('/quiz/1')
+        router.push('/quiz/1');
     };
 
     return (
@@ -38,22 +42,26 @@ export default function Home() {
                 <Alert status='error' variant='left-accent'>
                     <AlertIcon />
                     <AlertTitle>エラーが発生しました</AlertTitle>
-                </Alert>)
-            }
-            <VStack h='94vh' justifyContent='center'>
+                </Alert>
+            )}
+            <VStack minH='84vh' justifyContent='center'>
                 <HStack>
-                    <Text color='#FE53BB' fontWeight='bold'>Range:</Text>
+                    <Text color='#FE53BB' fontWeight='bold'>
+                        Range:
+                    </Text>
                     <NumberInput
                         bg='white'
-                        w='100px'
+                        w='80px'
                         borderRadius='md'
                         value={range.min}
                         min={1}
                         max={quizzes.length - 5}
-                        onChange={(_, value) => setRange((prev) => ({
-                            ...prev,
-                            min: isNaN(value) ? 1 : value
-                        }))}
+                        onChange={(_, value) =>
+                            setRange((prev) => ({
+                                ...prev,
+                                min: isNaN(value) ? 1 : value,
+                            }))
+                        }
                     >
                         <NumberInputField />
                         <NumberInputStepper>
@@ -63,15 +71,17 @@ export default function Home() {
                     </NumberInput>
                     <NumberInput
                         bg='white'
-                        w='100px'
+                        w='80px'
                         borderRadius='md'
                         value={range.max}
                         min={5}
                         max={quizzes.length}
-                        onChange={(_, value) => setRange((prev) => ({
-                            ...prev,
-                            max: isNaN(value) ? quizzes.length : value
-                        }))}
+                        onChange={(_, value) =>
+                            setRange((prev) => ({
+                                ...prev,
+                                max: isNaN(value) ? quizzes.length : value,
+                            }))
+                        }
                     >
                         <NumberInputField />
                         <NumberInputStepper>
@@ -85,7 +95,7 @@ export default function Home() {
                     color='#FE53BB'
                     isLoading={isLoading}
                     isDisabled={error}
-                    loadingText='Let&apos;s get started!!!'
+                    loadingText="Let's get started!!!"
                     onClick={() => moveToQuiz()}
                 >
                     Let&apos;s get started !!!
@@ -93,4 +103,4 @@ export default function Home() {
             </VStack>
         </>
     );
-};
+}
