@@ -30,14 +30,14 @@ const Header = () => {
 
     return (
         <HStack h='8vh' backgroundColor='rgba(255, 255, 255, .2)' justifyContent='right'>
-            <Box mr={4}>
+            <Box pr={2}>
                 <NextLink href={SPREAD_SHEET_LINK} passHref legacyBehavior>
                     <ChakraLink isExternal color='#FE53BB' fontWeight='bold'>
                         See the source
                     </ChakraLink>
                 </NextLink>
             </Box>
-            <Button colorScheme='teal' mr={4} onClick={onOpen}>
+            <Button colorScheme='blackAlpha' mr={4} onClick={onOpen}>
                 Quit
             </Button>
             <AlertDialog

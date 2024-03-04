@@ -46,8 +46,8 @@ export default function Home() {
             )}
             <VStack minH='84vh' justifyContent='center'>
                 <HStack>
-                    <Text color='#FE53BB' fontWeight='bold'>
-                        Range:
+                    <Text color='#FE53BB' fontSize='2xl'>
+                        No.
                     </Text>
                     <NumberInput
                         bg='white'
@@ -69,6 +69,9 @@ export default function Home() {
                             <NumberDecrementStepper />
                         </NumberInputStepper>
                     </NumberInput>
+                    <Text color='#FE53BB' fontSize='2xl'>
+                        &#8211;
+                    </Text>
                     <NumberInput
                         bg='white'
                         w='80px'

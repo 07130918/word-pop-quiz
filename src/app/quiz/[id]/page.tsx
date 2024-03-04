@@ -64,7 +64,7 @@ export default function Quiz({ params }: { params: { id: string } }) {
                     <Button
                         mr={4}
                         size='lg'
-                        colorScheme='blackAlpha'
+                        colorScheme='gray'
                         isDisabled={!answered}
                         onClick={() => router.push(`/quiz/${currentQuizNum + 1}`)}
                     >

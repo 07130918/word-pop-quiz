@@ -7,8 +7,8 @@ const Goal: NextPage = () => {
     const router = useRouter();
     return (
         <>
-            <Flex h='94vh' justifyContent='center' alignItems='center'>
-                <Button size='lg' color='#5386fe' onClick={() => router.push('/')}>
+            <Flex minH='84vh' justifyContent='center' alignItems='center'>
+                <Button size='lg' colorScheme='blackAlpha' onClick={() => router.push('/')}>
                     See ya!
                 </Button>
             </Flex>
