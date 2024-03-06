@@ -29,16 +29,16 @@ export default function Quiz({ params }: { params: { id: string } }) {
     }, [currentQuizNum, quizzes, router]);
 
     return (
-        <Stack w='90vw' m='auto' mt={10}>
+        <Stack w='90vw' m='auto' maxH='80vh' overflowY='scroll'>
             <Heading color='cyan.200'>Question {currentQuizNum}</Heading>
             <Progress
                 value={(currentQuizNum / quizzes.length) * 100}
                 size='xs'
                 colorScheme='pink'
             />
-            <Stack mt={10}>
+            <Stack pt={10}>
                 <Heading color='cyan.200'>{currentQuiz?.definition}</Heading>
-                <Stack mt={10}>
+                <Stack pt={10}>
                     {currentQuiz?.choices.map((choice) => {
                         const isCorrect = currentQuiz.english === choice && answered;
                         return (
