@@ -36,9 +36,9 @@ export default function Quiz({ params }: { params: { id: string } }) {
                 size='xs'
                 colorScheme='pink'
             />
-            <Stack pt={10}>
+            <Stack pt={{ base: 0, md: 4 }}>
                 <Heading color='cyan.200'>{currentQuiz?.definition}</Heading>
-                <Stack pt={10}>
+                <Stack>
                     {currentQuiz?.choices.map((choice) => {
                         const isCorrect = currentQuiz.english === choice && answered;
                         return (
