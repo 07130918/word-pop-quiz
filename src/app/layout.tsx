@@ -1,7 +1,7 @@
 import Providers from '@/app/providers';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Box } from '@chakra-ui/react';
+import Header from '@/components/Header';
+import { Stack } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,18 +14,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang='en'>
             <body>
                 <Providers>
-                    <Box
-                        h='100vh'
+                    <Stack
+                        minH='100vh'
                         w='100vw'
+                        overflow='scroll'
                         bgImage="url('/uyu_mint_item001.jpeg')"
                         bgPosition='center'
                         bgRepeat='no-repeat'
                         bgSize='cover'
                     >
                         <Header />
-                        {children}
+                        <Stack>{children}</Stack>
                         <Footer />
-                    </Box>
+                    </Stack>
                 </Providers>
             </body>
         </html>
