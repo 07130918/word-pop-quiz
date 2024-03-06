@@ -2,6 +2,7 @@
 import { QuizzesContext } from '@/hooks/quizzes';
 import fisherYatesShuffle from '@/lib/shuffle';
 import {
+    Box,
     Button,
     HStack,
     NumberDecrementStepper,
@@ -11,7 +12,7 @@ import {
     NumberInputStepper,
     Text,
     VStack,
-    useToast,
+    useToast
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
@@ -47,65 +48,69 @@ export default function Home() {
     };
     return (
         <>
-            <VStack justify='center'>
-                <HStack justify='center'>
-                    <Text color='#FE53BB' fontSize='2xl'>
-                        No.
-                    </Text>
-                    <NumberInput
-                        bg='white'
-                        w='80px'
-                        borderRadius='md'
-                        value={range.min}
-                        min={1}
-                        max={quizzes.length - 5}
-                        onChange={(_, value) =>
-                            setRange((prev) => ({
-                                ...prev,
-                                min: isNaN(value) ? 1 : value,
-                            }))
-                        }
-                    >
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                    <Text color='#FE53BB' fontSize='2xl'>
-                        &#8211;
-                    </Text>
-                    <NumberInput
-                        bg='white'
-                        w='80px'
-                        borderRadius='md'
-                        value={range.max}
-                        min={5}
-                        max={quizzes.length}
-                        onChange={(_, value) =>
-                            setRange((prev) => ({
-                                ...prev,
-                                max: isNaN(value) ? quizzes.length : value,
-                            }))
-                        }
-                    >
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                </HStack>
-                <Button
-                    size='lg'
-                    color='#FE53BB'
-                    isLoading={isLoading}
-                    isDisabled={error}
-                    loadingText="Let's get started!!!"
-                    onClick={() => moveToQuiz()}
-                >
-                    Let&apos;s get started !!!
-                </Button>
+            <VStack justify='center' alignItems='center' h='80vh'>
+                <Box>
+                    <HStack justify='center'>
+                        <Text color='#FE53BB' fontSize='2xl'>
+                            No.
+                        </Text>
+                        <NumberInput
+                            bg='white'
+                            w='80px'
+                            borderRadius='md'
+                            value={range.min}
+                            min={1}
+                            max={quizzes.length - 5}
+                            onChange={(_, value) =>
+                                setRange((prev) => ({
+                                    ...prev,
+                                    min: isNaN(value) ? 1 : value,
+                                }))
+                            }
+                        >
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                        <Text color='#FE53BB' fontSize='2xl'>
+                            &#8211;
+                        </Text>
+                        <NumberInput
+                            bg='white'
+                            w='80px'
+                            borderRadius='md'
+                            value={range.max}
+                            min={5}
+                            max={quizzes.length}
+                            onChange={(_, value) =>
+                                setRange((prev) => ({
+                                    ...prev,
+                                    max: isNaN(value) ? quizzes.length : value,
+                                }))
+                            }
+                        >
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </HStack>
+                    <Box pt={4}>
+                        <Button
+                            size='lg'
+                            color='#FE53BB'
+                            isLoading={isLoading}
+                            isDisabled={error}
+                            loadingText="Let's get started!!!"
+                            onClick={() => moveToQuiz()}
+                        >
+                            Let&apos;s get started !!!
+                        </Button>
+                    </Box>
+                </Box>
             </VStack>
         </>
     );
